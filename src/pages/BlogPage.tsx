@@ -29,6 +29,7 @@ export function BlogPage() {
         en={dict.blog.page.en}
         ja={dict.blog.page.ja}
         breadcrumbs={[{ label: dict.blog.page.ja }]}
+        variant="blog"
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-6">

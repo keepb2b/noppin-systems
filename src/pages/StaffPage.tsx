@@ -14,6 +14,7 @@ export function StaffPage() {
         en={dict.staff.page.en}
         ja={dict.staff.page.ja}
         breadcrumbs={[{ label: dict.staff.page.ja }]}
+        variant="staff"
       />
       <section className="py-16 md:py-24">
         <div ref={ref} className="mx-auto grid max-w-6xl gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3 md:px-6">

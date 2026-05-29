@@ -25,14 +25,16 @@ export function GlobalHeader() {
       data-hero="header"
     >
       <div className="mx-auto flex h-14 max-w-[100rem] items-center gap-3 px-4 sm:gap-4 md:h-[4.25rem] md:px-6 lg:gap-5">
-        <Link to="/" className="flex shrink-0 items-center" aria-label="日本システムズ">
-          <img
-            src="/images/nippon-systems-logo.png"
-            alt="日本システムズ"
-            className="h-8 w-auto max-w-[128px] rounded-sm bg-header-bg object-contain object-left sm:h-9 sm:max-w-[148px] 2xl:h-10 2xl:max-w-[190px]"
-            width={190}
-            height={40}
-          />
+        <Link to="/" className="header-logo-link flex shrink-0 items-center" aria-label="日本システムズ">
+          <span className="header-logo-frame">
+            <img
+              src="/images/nippon-systems-logo.png"
+              alt="日本システムズ"
+              className="header-logo-img h-8 w-auto max-w-[128px] object-contain object-left sm:h-9 sm:max-w-[148px] 2xl:h-10 2xl:max-w-[190px]"
+              width={190}
+              height={40}
+            />
+          </span>
         </Link>
 
         <nav

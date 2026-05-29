@@ -5,83 +5,203 @@ import { useReducedMotion } from './useReducedMotion'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const CARD_FULL_WIDTH = 300
-const GATHER_PHASE_END = 0.5
-const SCATTER_PHASE_START = 0.52
-
-function scatterX(side: string): number {
-  return side === 'left' ? -320 : 320
+type AnimationConfig = {
+  pin: boolean
+  scrollDistance: string
+  scrub: number
+  gatherEnd: number
+  holdEnd: number
+  scatterEnd: number
+  travelMin: number
+  travelMultiplier: number
+  travelMax: number
+  cardFullWidth: number
+  start: string
 }
 
-function cardLocalProgress(scrollProgress: number, index: number, total: number) {
-  const slot = 1 / total
-  const gatherStart = index * slot * GATHER_PHASE_END
-  const gatherEnd = (index + 1) * slot * GATHER_PHASE_END
-  const scatterStart = SCATTER_PHASE_START + index * slot * (1 - SCATTER_PHASE_START)
-  const scatterEnd = SCATTER_PHASE_START + (index + 1) * slot * (1 - SCATTER_PHASE_START)
+function getDesktopConfig(): AnimationConfig {
+  return {
+    pin: true,
+    scrollDistance: '+=220%',
+    scrub: 1.35,
+    gatherEnd: 0.48,
+    holdEnd: 0.56,
+    scatterEnd: 0.84,
+    travelMin: 440,
+    travelMultiplier: 0.36,
+    travelMax: 640,
+    cardFullWidth: 300,
+    start: 'top 18%',
+  }
+}
 
-  if (scrollProgress < gatherStart) {
-    return { x: 0, width: 0, opacity: 0, iconOpacity: 0 }
+function getMobileConfig(container: HTMLElement): AnimationConfig {
+  const column = container.querySelector<HTMLElement>('ul')
+  const columnWidth = column?.clientWidth ?? window.innerWidth * 0.42
+  const cardFullWidth = Math.max(96, columnWidth - 28)
+
+  return {
+    pin: false,
+    scrollDistance: 'bottom 15%',
+    scrub: 0.85,
+    gatherEnd: 0.58,
+    holdEnd: 0.68,
+    scatterEnd: 0.9,
+    travelMin: 72,
+    travelMultiplier: 0.28,
+    travelMax: 140,
+    cardFullWidth,
+    start: 'top 88%',
   }
+}
+
+function travelDistance(config: AnimationConfig): number {
+  return Math.max(config.travelMin, Math.min(window.innerWidth * config.travelMultiplier, config.travelMax))
+}
+
+function scatterX(side: string, config: AnimationConfig): number {
+  const travel = travelDistance(config)
+  return side === 'left' ? -travel : travel
+}
+
+function easeApproach(t: number): number {
+  return 1 - Math.pow(1 - t, 3)
+}
+
+function easeDepart(t: number): number {
+  return t * t * t * t
+}
+
+type CardFrame = {
+  x: number
+  width: number
+  opacity: number
+  iconOpacity: number
+  scale: number
+}
+
+function sharedCardProgress(scrollProgress: number, config: AnimationConfig): CardFrame {
+  const { gatherEnd, holdEnd, scatterEnd } = config
+
+  if (scrollProgress <= 0) {
+    return { x: 0, width: 0, opacity: 0, iconOpacity: 0, scale: 0.9 }
+  }
+
   if (scrollProgress < gatherEnd) {
-    const t = (scrollProgress - gatherStart) / (gatherEnd - gatherStart)
-    const eased = 1 - Math.pow(1 - t, 2.5)
-    return { x: eased, width: eased, opacity: eased, iconOpacity: Math.max(0, (t - 0.35) / 0.65) }
-  }
-  if (scrollProgress < scatterStart) {
-    return { x: 1, width: 1, opacity: 1, iconOpacity: 1 }
-  }
-  if (scrollProgress < scatterEnd) {
-    const t = (scrollProgress - scatterStart) / (scatterEnd - scatterStart)
-    const eased = t * t
+    const raw = scrollProgress / gatherEnd
+    const approach = easeApproach(raw)
+    const reveal = easeApproach(Math.max(0, (raw - 0.18) / 0.82))
     return {
-      x: 1 - eased,
-      width: 1 - eased,
-      opacity: 1 - eased,
-      iconOpacity: 1 - eased,
+      x: approach,
+      width: reveal,
+      opacity: Math.min(1, approach * 0.55 + reveal * 0.45),
+      iconOpacity: reveal,
+      scale: 0.9 + approach * 0.1,
     }
   }
-  return { x: 0, width: 0, opacity: 0, iconOpacity: 0 }
+
+  if (scrollProgress < holdEnd) {
+    return { x: 1, width: 1, opacity: 1, iconOpacity: 1, scale: 1 }
+  }
+
+  if (scrollProgress < scatterEnd) {
+    const t = easeDepart((scrollProgress - holdEnd) / (scatterEnd - holdEnd))
+    return {
+      x: 1 - t,
+      width: 1 - t,
+      opacity: 1 - t,
+      iconOpacity: 1 - t,
+      scale: 1 - t * 0.1,
+    }
+  }
+
+  return { x: 0, width: 0, opacity: 0, iconOpacity: 0, scale: 0.9 }
+}
+
+function setupAnimation(container: HTMLElement, config: AnimationConfig) {
+  const cards = gsap.utils.toArray<HTMLElement>('[data-concern-card]', container)
+  if (cards.length === 0) return () => {}
+
+  const applyFrame = (scrollProgress: number) => {
+    const frame = sharedCardProgress(scrollProgress, config)
+
+    cards.forEach((card) => {
+      const side = card.dataset.side === 'right' ? 'right' : 'left'
+      const sx = scatterX(side, config)
+      const body = card.querySelector<HTMLElement>('.concern-card-body')
+      const icon = card.querySelector<HTMLElement>('[data-concern-icon]')
+
+      gsap.set(card, {
+        x: sx * (1 - frame.x),
+        opacity: frame.opacity,
+        scale: frame.scale,
+        transformOrigin: side === 'left' ? 'center right' : 'center left',
+      })
+      if (body) {
+        gsap.set(body, {
+          width: frame.width * config.cardFullWidth,
+          opacity: Math.min(1, frame.opacity * 1.15),
+        })
+      }
+      if (icon) {
+        gsap.set(icon, { opacity: frame.iconOpacity, scale: 0.55 + frame.iconOpacity * 0.45 })
+      }
+    })
+  }
+
+  cards.forEach((card) => {
+    const side = card.dataset.side === 'right' ? 'right' : 'left'
+    const body = card.querySelector<HTMLElement>('.concern-card-body')
+    const icon = card.querySelector<HTMLElement>('[data-concern-icon]')
+    gsap.set(card, {
+      x: scatterX(side, config),
+      opacity: 0,
+      scale: 0.9,
+      transformOrigin: side === 'left' ? 'center right' : 'center left',
+    })
+    if (body) gsap.set(body, { width: 0, opacity: 0, overflow: 'hidden' })
+    if (icon) gsap.set(icon, { opacity: 0, scale: 0.5 })
+  })
+
+  const trigger = ScrollTrigger.create({
+    trigger: container,
+    start: config.start,
+    end: config.scrollDistance,
+    pin: config.pin,
+    pinSpacing: config.pin,
+    scrub: config.scrub,
+    anticipatePin: config.pin ? 1 : 0,
+    invalidateOnRefresh: true,
+    onUpdate: (self) => applyFrame(self.progress),
+    onEnter: (self) => applyFrame(self.progress),
+    onEnterBack: (self) => applyFrame(self.progress),
+    onLeave: () => applyFrame(1),
+    onLeaveBack: () => applyFrame(0),
+  })
+
+  applyFrame(trigger.progress)
+
+  return () => {
+    trigger.kill()
+    cards.forEach((card) => {
+      gsap.set(card, { clearProps: 'transform,opacity' })
+      const body = card.querySelector<HTMLElement>('.concern-card-body')
+      const icon = card.querySelector<HTMLElement>('[data-concern-icon]')
+      if (body) gsap.set(body, { clearProps: 'width,opacity' })
+      if (icon) gsap.set(icon, { clearProps: 'transform,opacity' })
+    })
+  }
 }
 
 export function useConcernsGatherAnimation(enabled = true) {
   const containerRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
-  const triggerRef = useRef<ScrollTrigger | null>(null)
 
   useEffect(() => {
     const container = containerRef.current
     if (!container || !enabled) return
 
-    const cards = gsap.utils
-      .toArray<HTMLElement>('[data-concern-card]', container)
-      .sort((a, b) => Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0))
-
-    if (cards.length === 0) return
-
-    const applyFrame = (scrollProgress: number) => {
-      cards.forEach((card, i) => {
-        const side = card.dataset.side === 'right' ? 'right' : 'left'
-        const sx = scatterX(side)
-        const body = card.querySelector<HTMLElement>('.concern-card-body')
-        const icon = card.querySelector<HTMLElement>('[data-concern-icon]')
-        const { x, width, opacity, iconOpacity } = cardLocalProgress(scrollProgress, i, cards.length)
-
-        gsap.set(card, {
-          x: sx * (1 - x),
-          opacity,
-        })
-        if (body) {
-          gsap.set(body, {
-            width: width * CARD_FULL_WIDTH,
-            opacity: Math.min(1, opacity * 1.2),
-          })
-        }
-        if (icon) {
-          gsap.set(icon, { opacity: iconOpacity, scale: 0.6 + iconOpacity * 0.4 })
-        }
-      })
-    }
+    const cards = gsap.utils.toArray<HTMLElement>('[data-concern-card]', container)
 
     if (reduced) {
       cards.forEach((card) => {
@@ -95,28 +215,11 @@ export function useConcernsGatherAnimation(enabled = true) {
     }
 
     const ctx = gsap.context(() => {
-      cards.forEach((card) => {
-        const side = card.dataset.side === 'right' ? 'right' : 'left'
-        const body = card.querySelector<HTMLElement>('.concern-card-body')
-        const icon = card.querySelector<HTMLElement>('[data-concern-icon]')
-        gsap.set(card, { x: scatterX(side), opacity: 0 })
-        if (body) gsap.set(body, { width: 0, opacity: 0, overflow: 'hidden' })
-        if (icon) gsap.set(icon, { opacity: 0, scale: 0.5 })
-      })
+      const mm = gsap.matchMedia()
 
-      triggerRef.current = ScrollTrigger.create({
-        trigger: container,
-        start: 'top 75%',
-        end: 'bottom 25%',
-        scrub: 0.6,
-        onUpdate: (self) => applyFrame(self.progress),
-        onEnter: (self) => applyFrame(self.progress),
-        onEnterBack: (self) => applyFrame(self.progress),
-        onLeave: () => applyFrame(1),
-        onLeaveBack: () => applyFrame(0),
-      })
+      mm.add('(min-width: 768px)', () => setupAnimation(container, getDesktopConfig()))
 
-      applyFrame(triggerRef.current?.progress ?? 0)
+      mm.add('(max-width: 767px)', () => setupAnimation(container, getMobileConfig(container)))
     }, container)
 
     const refresh = () => ScrollTrigger.refresh()
@@ -126,7 +229,6 @@ export function useConcernsGatherAnimation(enabled = true) {
     return () => {
       window.clearTimeout(t)
       window.removeEventListener('load', refresh)
-      triggerRef.current = null
       ctx.revert()
     }
   }, [enabled, reduced])

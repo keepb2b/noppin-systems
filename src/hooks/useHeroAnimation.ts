@@ -1,16 +1,16 @@
 import { useEffect, type RefObject } from 'react'
 import gsap from 'gsap'
-import { useEntranceComplete } from '../context/EntranceContext'
+import { useLoadingComplete } from '../context/LoadingContext'
 import { useReducedMotion } from './useReducedMotion'
 
 export function useHeroAnimation(containerRef: RefObject<HTMLElement | null>) {
   const reduced = useReducedMotion()
-  const entranceComplete = useEntranceComplete()
+  const loadingComplete = useLoadingComplete()
 
   useEffect(() => {
     const root = containerRef.current
-    if (!root || reduced || !entranceComplete) {
-      if (root && (reduced || entranceComplete)) {
+    if (!root || reduced || !loadingComplete) {
+      if (root && (reduced || loadingComplete)) {
         root.querySelectorAll('[data-hero]').forEach((el) => {
           ;(el as HTMLElement).style.opacity = '1'
           ;(el as HTMLElement).style.transform = 'none'
@@ -50,5 +50,5 @@ export function useHeroAnimation(containerRef: RefObject<HTMLElement | null>) {
     }, root)
 
     return () => ctx.revert()
-  }, [containerRef, reduced, entranceComplete])
+  }, [containerRef, reduced, loadingComplete])
 }

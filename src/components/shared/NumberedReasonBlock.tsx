@@ -2,23 +2,30 @@ import type { Dictionary } from '../../i18n/types'
 
 type ReasonItem = Dictionary['reasons']['items'][number]
 
-type Props = ReasonItem & { reverse?: boolean }
+type Props = ReasonItem & { reverse?: boolean; imageSrc?: string }
 
-export function NumberedReasonBlock({ number, title, description, imageAlt, reverse }: Props) {
+export function NumberedReasonBlock({ number, title, description, imageAlt, reverse, imageSrc }: Props) {
   return (
     <article
       className={`scroll-reveal grid items-center gap-8 md:grid-cols-2 md:gap-12 ${
         reverse ? 'md:[&>*:first-child]:order-2' : ''
       }`}
     >
-      <div
-        className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-navy-800 to-navy-950"
-        aria-label={imageAlt}
-      >
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-display text-6xl font-bold text-white/10">{number}</span>
-        </div>
-        <div className="absolute bottom-4 left-4 rounded-full bg-coral-500 px-4 py-1 text-sm font-bold text-white">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-navy-800 to-navy-950">
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
+            <span className="font-display text-6xl font-bold text-white/10">{number}</span>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/35 via-transparent to-navy-950/10" aria-hidden />
+        <div className="absolute bottom-4 left-4 rounded-full bg-coral-500 px-4 py-1 text-sm font-bold text-white shadow-md">
           REASON {number}
         </div>
       </div>

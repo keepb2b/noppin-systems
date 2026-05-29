@@ -31,6 +31,7 @@ export function WorksPage() {
         en={dict.works.page.en}
         ja={dict.works.page.ja}
         breadcrumbs={[{ label: dict.works.page.ja }]}
+        variant="works"
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-6">

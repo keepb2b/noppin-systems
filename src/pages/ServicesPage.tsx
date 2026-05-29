@@ -14,6 +14,7 @@ export function ServicesPage() {
         en={dict.services.page.en}
         ja={dict.services.page.ja}
         breadcrumbs={[{ label: dict.services.page.ja }]}
+        variant="services"
       />
       <section ref={ref} className="py-8 md:py-12">
         <div className="mx-auto max-w-6xl px-4 md:px-6">

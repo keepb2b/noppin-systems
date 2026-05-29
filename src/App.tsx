@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LanguageProvider } from './i18n'
-import { EntranceProvider } from './context/EntranceContext'
+import { LoadingProvider } from './context/LoadingContext'
 import { Layout } from './components/layout/Layout'
 import { HomePage } from './pages/HomePage'
 import { StrengthsPage } from './pages/StrengthsPage'
@@ -17,7 +17,7 @@ import { ContactPage } from './pages/ContactPage'
 export default function App() {
   return (
     <LanguageProvider>
-      <EntranceProvider>
+      <LoadingProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
@@ -35,7 +35,7 @@ export default function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </EntranceProvider>
+      </LoadingProvider>
     </LanguageProvider>
   )
 }

@@ -13,6 +13,7 @@ export function CompanyPage() {
         en={dict.company.page.en}
         ja={dict.company.page.ja}
         breadcrumbs={[{ label: dict.company.page.ja }]}
+        variant="company"
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-4 md:px-6">

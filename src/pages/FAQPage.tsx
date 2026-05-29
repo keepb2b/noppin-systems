@@ -30,6 +30,7 @@ export function FAQPage() {
         en={dict.faq.page.en}
         ja={dict.faq.page.ja}
         breadcrumbs={[{ label: dict.faq.page.ja }]}
+        variant="faq"
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-4 md:px-6">

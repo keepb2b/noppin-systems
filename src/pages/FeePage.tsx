@@ -15,6 +15,7 @@ export function FeePage() {
         en={dict.fee.page.en}
         ja={dict.fee.page.ja}
         breadcrumbs={[{ label: dict.fee.page.ja }]}
+        variant="pricing"
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-6">

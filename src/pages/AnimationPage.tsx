@@ -29,6 +29,7 @@ export function AnimationPage() {
         en={dict.animation.page.en}
         ja={dict.animation.page.ja}
         breadcrumbs={[{ label: dict.animation.page.ja }]}
+        variant="animation"
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-6">

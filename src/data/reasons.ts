@@ -23,6 +23,15 @@ export const reasonsSection = {
   ctaLabel: '選ばれる理由をさらに読む',
 } as const
 
+export const strengthImages = [
+  '/images/strength/6 (1).png',
+  '/images/strength/6 (2).png',
+  '/images/strength/6 (3).png',
+  '/images/strength/6 (4).png',
+  '/images/strength/6 (5).png',
+  '/images/strength/6 (6).png',
+] as const
+
 export const reasons: Reason[] = [
   {
     number: '01',
