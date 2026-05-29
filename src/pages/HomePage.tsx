@@ -187,11 +187,11 @@ export function HomePage() {
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.company.en} ja={dict.home.company.ja} />
           <div className="scroll-reveal grid items-center gap-10 md:grid-cols-2">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-navy-800 to-navy-950">
+            <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-navy-800 to-navy-950">
               <img
                 src="/images/who_we_are_it_company_team_photo.png"
                 alt={dict.home.company.ja}
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 loading="lazy"
               />
             </div>

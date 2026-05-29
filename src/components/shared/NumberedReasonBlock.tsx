@@ -11,12 +11,12 @@ export function NumberedReasonBlock({ number, title, description, imageAlt, reve
         reverse ? 'md:[&>*:first-child]:order-2' : ''
       }`}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-navy-800 to-navy-950">
+      <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-navy-800 to-navy-950">
         {imageSrc ? (
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
             loading="lazy"
           />
         ) : (
