@@ -27,6 +27,11 @@
   --color-aizome-500: #5a8fa8;
   --color-aizome-600: #457a94;
 
+  /* Header — neutral gray to harmonize with NIPPON SYSTEMS logo plate */
+  --color-header-bg: #eceef1;
+  --color-header-border: #d4d8de;
+  --color-header-muted: #5c6570;
+
   /* 抹茶 — subtle natural accent (optional highlights) */
   --color-matsu-500: #6b9b85;
   --color-matsu-400: #8bb5a0;

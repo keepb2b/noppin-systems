@@ -7,7 +7,9 @@ import { LanguageSwitcher } from '../ui/LanguageSwitcher'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   `shrink-0 whitespace-nowrap rounded-full px-2.5 py-2 text-[11px] font-medium leading-none transition-colors 2xl:px-3 2xl:text-xs ${
-    isActive ? 'bg-white/10 text-coral-400' : 'text-white/80 hover:text-white'
+    isActive
+      ? 'bg-white text-coral-500 shadow-sm'
+      : 'text-header-muted hover:bg-white/70 hover:text-navy-900'
   }`
 
 const headerBtnClass =
@@ -19,7 +21,7 @@ export function GlobalHeader() {
 
   return (
     <header
-      className="fixed top-0 right-0 left-0 z-50 border-b border-white/10 bg-navy-950/90 backdrop-blur-md"
+      className="fixed top-0 right-0 left-0 z-50 border-b border-header-border bg-header-bg/95 text-navy-900 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset] backdrop-blur-md"
       data-hero="header"
     >
       <div className="mx-auto flex h-14 max-w-[100rem] items-center gap-3 px-4 sm:gap-4 md:h-[4.25rem] md:px-6 lg:gap-5">
@@ -27,7 +29,7 @@ export function GlobalHeader() {
           <img
             src="/images/nippon-systems-logo.png"
             alt="日本システムズ"
-            className="h-8 w-auto max-w-[128px] rounded-md bg-white px-2 py-0.5 object-contain object-left sm:h-9 sm:max-w-[148px] 2xl:h-10 2xl:max-w-[190px] 2xl:px-2.5 2xl:py-1"
+            className="h-8 w-auto max-w-[128px] rounded-sm bg-header-bg object-contain object-left sm:h-9 sm:max-w-[148px] 2xl:h-10 2xl:max-w-[190px]"
             width={190}
             height={40}
           />
@@ -45,12 +47,12 @@ export function GlobalHeader() {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <LanguageSwitcher className="shrink-0" />
+          <LanguageSwitcher className="shrink-0" tone="light" />
 
           <div className="hidden items-center gap-0.5 lg:flex">
             <a
               href="mailto:info@nippon-systems.example"
-              className="shrink-0 rounded-full p-2 text-white/70 hover:bg-white/10 hover:text-white"
+              className="shrink-0 rounded-full p-2 text-header-muted hover:bg-white/80 hover:text-navy-900"
               aria-label={dict.common.mail}
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +66,7 @@ export function GlobalHeader() {
             </a>
             <a
               href="https://www.chatwork.com"
-              className="shrink-0 rounded-full p-2 text-white/70 hover:bg-white/10 hover:text-white"
+              className="shrink-0 rounded-full p-2 text-header-muted hover:bg-white/80 hover:text-navy-900"
               aria-label="ChatWork"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -77,14 +79,14 @@ export function GlobalHeader() {
             <Button
               to="/contact"
               variant="outline"
-              className={`${headerBtnClass} !hidden !border-white/20 !text-white hover:!border-coral-500 hover:!text-coral-400 2xl:!inline-flex`}
+              className={`${headerBtnClass} !hidden !border-header-border !bg-white/60 !text-navy-800 hover:!border-coral-500 hover:!text-coral-500 2xl:!inline-flex`}
             >
               {dict.common.documentRequest}
             </Button>
             <Button
               to="/contact"
               variant="secondary"
-              className={`${headerBtnClass} !hidden !border-white/35 !bg-transparent !text-white hover:!border-white hover:!bg-white hover:!text-navy-900 2xl:!inline-flex`}
+              className={`${headerBtnClass} !hidden !border-header-border !bg-white/60 !text-navy-800 hover:!border-navy-800 hover:!bg-navy-900 hover:!text-white 2xl:!inline-flex`}
             >
               {dict.common.contact}
             </Button>
@@ -95,7 +97,7 @@ export function GlobalHeader() {
 
           <button
             type="button"
-            className="shrink-0 rounded-lg p-2 text-white 2xl:hidden"
+            className="shrink-0 rounded-lg p-2 text-navy-800 2xl:hidden"
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-label={dict.common.menu}
@@ -112,14 +114,14 @@ export function GlobalHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-white/10 bg-navy-950 px-4 py-4 2xl:hidden" aria-label="Mobile navigation">
+        <nav className="border-t border-header-border bg-header-bg px-4 py-4 2xl:hidden" aria-label="Mobile navigation">
           <ul className="space-y-1">
             {navRoutes.map((item) => (
               <li key={item.path}>
                 <NavLink
                   to={item.path}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2.5 text-sm text-white/90 hover:bg-white/10"
+                  className="block rounded-lg px-3 py-2.5 text-sm text-navy-800 hover:bg-white/80"
                 >
                   {dict.nav[item.key]}
                 </NavLink>
@@ -130,14 +132,14 @@ export function GlobalHeader() {
             <Button
               to="/contact"
               variant="outline"
-              className="w-full justify-center !border-white/30 !text-white sm:flex-1"
+              className="w-full justify-center !border-header-border !bg-white/70 !text-navy-800 sm:flex-1"
             >
               {dict.common.documentRequest}
             </Button>
             <Button
               to="/contact"
               variant="secondary"
-              className="w-full justify-center !border-white/35 !bg-transparent !text-white hover:!border-white hover:!bg-white hover:!text-navy-900 sm:flex-1"
+              className="w-full justify-center !border-header-border !bg-white/70 !text-navy-800 hover:!bg-navy-900 hover:!text-white sm:flex-1"
             >
               {dict.common.contact}
             </Button>
