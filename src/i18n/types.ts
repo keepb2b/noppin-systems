@@ -1,4 +1,5 @@
 import type { ReasonIcon } from '../data/reasons'
+import type { FeeTableSection } from '../data/feeTables.types'
 
 export type Locale = 'ja' | 'en'
 
@@ -95,11 +96,14 @@ export type Dictionary = {
     page: { en: string; ja: string }
     basicTitle: string
     pageFeeTitle: string
+    pageTablesTitle: string
+    tableBadges: { basic: string; mid: string; high: string }
+    tableNotes: string[]
+    tableSections: FeeTableSection[]
     notesTitle: string
     notes: string[]
     requestQuote: string
-    pricing: { label: string; price: string; unit: string; note: string }[]
-    pageFees: { name: string; price: string }[]
+    pricing: { label: string; price: string; unit: string; note: string; prefix?: string }[]
   }
   faq: {
     page: { en: string; ja: string }
