@@ -22,10 +22,9 @@ export function TypewriterHeading({
   const { displayed, isComplete, targetRef } = useTypewriter({ text, speed })
 
   return (
-    <div ref={targetRef} className="text-center">
+    <div ref={targetRef} className="mx-auto w-full max-w-full overflow-hidden text-center">
       <Tag
-        className={`inline-block font-display font-bold uppercase tracking-tight text-navy-900 ${className}`}
-        style={{ minWidth: `${text.length + 1}ch` }}
+        className={`mx-auto inline-block max-w-full font-display font-bold uppercase tracking-tight text-navy-900 ${className}`}
       >
         <span aria-hidden>{displayed}</span>
         <span

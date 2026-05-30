@@ -5,13 +5,13 @@ import { FixedContactCTA } from './FixedContactCTA'
 
 export function Layout() {
   return (
-    <>
+    <div className="page-shell">
       <GlobalHeader />
-      <main className="overflow-x-clip">
+      <main className="page-section overflow-x-clip">
         <Outlet />
       </main>
       <GlobalFooter />
       <FixedContactCTA />
-    </>
+    </div>
   )
 }

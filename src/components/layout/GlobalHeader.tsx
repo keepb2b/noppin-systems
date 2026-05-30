@@ -12,16 +12,13 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       : 'text-header-muted hover:bg-white/70 hover:text-navy-900'
   }`
 
-const headerBtnClass =
-  '!shrink-0 !whitespace-nowrap !rounded-full !px-2.5 !py-1.5 !text-[10px] !leading-none sm:!px-3 sm:!py-2 sm:!text-[11px] 2xl:!px-4 2xl:!text-xs [&_svg]:hidden sm:[&_svg]:block'
-
 export function GlobalHeader() {
   const [open, setOpen] = useState(false)
   const { dict } = useI18n()
 
   return (
-    <header className="fixed top-0 right-0 left-0 isolate z-[60] border-b border-header-border bg-header-bg text-navy-900 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset] md:bg-header-bg/95 md:backdrop-blur-md">
-      <div className="mx-auto grid h-14 w-full min-w-0 max-w-[100rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 px-3 sm:gap-3 sm:px-4 md:h-[4.25rem] md:px-6 2xl:grid-cols-[auto_minmax(0,1fr)_auto]">
+    <header className="site-header fixed top-0 right-0 left-0 isolate z-[60] border-b border-header-border bg-header-bg text-navy-900 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset] md:bg-header-bg/95 md:backdrop-blur-md">
+      <div className="site-header__inner mx-auto grid h-14 w-full min-w-0 max-w-[100rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 sm:gap-3 md:h-[4.25rem] 2xl:grid-cols-[auto_minmax(0,1fr)_auto]">
         <Link to="/" className="header-logo-link flex min-w-0 items-center 2xl:col-start-1" aria-label="日本システムズ">
           <span className="header-logo-frame">
             <img
@@ -45,7 +42,7 @@ export function GlobalHeader() {
           ))}
         </nav>
 
-        <div className="col-start-2 flex shrink-0 items-center gap-1 sm:gap-2 2xl:col-start-3">
+        <div className="site-header__actions col-start-2 flex shrink-0 items-center gap-1 sm:gap-2 2xl:col-start-3">
           <LanguageSwitcher className="shrink-0 max-[359px]:scale-90" tone="light" />
 
           <div className="hidden items-center gap-0.5 lg:flex">
@@ -72,26 +69,6 @@ export function GlobalHeader() {
                 <path d="M12 2C6.48 2 2 5.58 2 10c0 2.54 1.19 4.81 3.05 6.45L4 22l5.67-2.12C10.42 20.28 11.18 20.5 12 20.5c5.52 0 10-3.58 10-8s-4.48-8-10-8z" />
               </svg>
             </a>
-          </div>
-
-          <div className="flex items-center gap-1 sm:gap-1.5 2xl:gap-2">
-            <Button
-              to="/contact"
-              variant="outline"
-              className={`${headerBtnClass} !hidden !border-header-border !bg-white/60 !text-navy-800 hover:!border-coral-500 hover:!text-coral-500 2xl:!inline-flex`}
-            >
-              {dict.common.documentRequest}
-            </Button>
-            <Button
-              to="/contact"
-              variant="secondary"
-              className={`${headerBtnClass} !hidden !border-header-border !bg-white/60 !text-navy-800 hover:!border-navy-800 hover:!bg-navy-900 hover:!text-white 2xl:!inline-flex`}
-            >
-              {dict.common.contact}
-            </Button>
-            <Button to="/contact" variant="primary" className={`${headerBtnClass} 2xl:!inline-flex`}>
-              {dict.common.freeConsultShort}
-            </Button>
           </div>
 
           <button

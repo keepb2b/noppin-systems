@@ -6,7 +6,7 @@ export function FixedContactCTA() {
 
   return (
     <aside
-      className="fixed-cta group fixed bottom-4 right-4 z-[100] md:bottom-6 md:right-6"
+      className="fixed-cta group fixed z-[100]"
       aria-label={dict.common.freeConsultShort}
     >
       <Link

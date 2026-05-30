@@ -157,9 +157,9 @@ export function ConcernsRadialSection() {
   const ordered = buildOrderedConcerns(radialConcerns)
 
   return (
-    <section className="overflow-hidden bg-sand-50 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <header className="mb-8 md:mb-12">
+    <section className="page-section overflow-hidden bg-sand-50 py-16 md:py-24">
+      <div className="mx-auto w-full min-w-0 max-w-6xl overflow-hidden px-4 md:px-6">
+        <header className="mb-8 overflow-hidden md:mb-12">
           <TypewriterHeading
             text={dict.home.concerns.title}
             subtitle={dict.home.concerns.subtitle}
@@ -170,11 +170,11 @@ export function ConcernsRadialSection() {
 
         <div
           ref={radialRef}
-          className="relative min-h-[32rem] overflow-x-clip md:min-h-[40rem] lg:min-h-[44rem]"
+          className="relative min-h-[32rem] w-full max-w-full overflow-hidden md:min-h-[40rem] lg:min-h-[44rem]"
           data-concerns-stage
         >
           {/* Mobile: hub on top, then side-by-side lists. Desktop: hub centered between columns. */}
-          <div className="flex flex-col gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-4 lg:gap-8">
+          <div className="flex flex-col gap-6 overflow-hidden md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-center md:gap-4 lg:gap-8">
             <div className="flex justify-center md:col-start-2">
               <CenterHub />
             </div>

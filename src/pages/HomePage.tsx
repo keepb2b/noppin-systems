@@ -35,7 +35,7 @@ export function HomePage() {
     <>
       <section
         ref={heroRef}
-        className="hero-home-bg relative min-h-[100dvh] overflow-hidden bg-navy-950 pt-24 pb-[min(42vw,14rem)] text-white md:min-h-screen md:pb-20"
+        className="hero-home-bg page-section relative min-h-[100dvh] w-full overflow-hidden bg-navy-950 pt-24 pb-[min(42vw,14rem)] text-white md:min-h-screen md:pb-20"
       >
         <MovingLinesBg />
         <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-coral-500/20 blur-3xl" data-hero="bg" />

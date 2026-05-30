@@ -7,7 +7,7 @@ export function GlobalFooter() {
   const { dict } = useI18n()
 
   return (
-    <footer className="bg-navy-950 text-white/80">
+    <footer className="page-section overflow-x-clip bg-navy-950 text-white/80">
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

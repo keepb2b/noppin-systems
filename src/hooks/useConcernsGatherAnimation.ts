@@ -22,17 +22,17 @@ type AnimationConfig = {
 
 function getDesktopConfig(): AnimationConfig {
   return {
-    pin: true,
-    scrollDistance: '+=220%',
+    pin: false,
+    scrollDistance: 'bottom 20%',
     scrub: 1.35,
     gatherEnd: 0.48,
     holdEnd: 0.56,
     scatterEnd: 0.84,
-    travelMin: 440,
-    travelMultiplier: 0.36,
-    travelMax: 640,
+    travelMin: 120,
+    travelMultiplier: 0.12,
+    travelMax: 200,
     cardFullWidth: 300,
-    start: 'top 18%',
+    start: 'top 80%',
   }
 }
 
@@ -48,9 +48,9 @@ function getMobileConfig(container: HTMLElement): AnimationConfig {
     gatherEnd: 0.58,
     holdEnd: 0.68,
     scatterEnd: 0.9,
-    travelMin: 72,
-    travelMultiplier: 0.28,
-    travelMax: 140,
+    travelMin: 0,
+    travelMultiplier: 0,
+    travelMax: 0,
     cardFullWidth,
     start: 'top 88%',
   }

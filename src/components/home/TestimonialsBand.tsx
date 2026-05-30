@@ -48,7 +48,7 @@ export function TestimonialsBand() {
   const loopItems = [...items, ...items]
 
   return (
-    <section className="overflow-hidden bg-sand-100 py-16 md:py-24">
+    <section className="page-section overflow-hidden bg-sand-100 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionTitle en={section.en} ja={section.ja} />
       </div>

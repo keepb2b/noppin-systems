@@ -40,10 +40,20 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-sand-50 font-sans text-navy-900 antialiased;
+    width: 100%;
+    overflow-x: clip;
+  }
+
+  #root {
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -629,6 +639,46 @@
       inset -10px 0 12px -4px rgb(236 238 241 / 0.95);
   }
 
+  /* Fixed header: stay painted above scroll content; avoid iOS clip/blur glitches */
+  .site-header {
+    width: 100%;
+    overflow: visible;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .site-header__inner {
+    overflow: visible;
+    max-width: 100%;
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+  }
+
+  @media (min-width: 768px) {
+    .site-header__inner {
+      padding-left: max(1.5rem, env(safe-area-inset-left, 0px));
+      padding-right: max(1.5rem, env(safe-area-inset-right, 0px));
+    }
+  }
+
+  .site-header__actions {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-shell {
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .page-section {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .page-hero-photo-bg {
     background-color: var(--color-sand-100);
   }
@@ -868,11 +918,15 @@
 
   .testimonials-marquee {
     --marquee-duration: 42s;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .testimonials-marquee-inner {
     animation: testimonials-marquee-scroll var(--marquee-duration) linear infinite;
     will-change: transform;
+    max-width: none;
   }
 
   .testimonials-marquee:hover .testimonials-marquee-inner,
@@ -911,6 +965,18 @@
 
     .testimonials-marquee-fade {
       display: none;
+    }
+  }
+
+  .fixed-cta {
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (min-width: 768px) {
+    .fixed-cta {
+      right: max(1.5rem, env(safe-area-inset-right, 0px));
+      bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
     }
   }
 
