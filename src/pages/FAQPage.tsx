@@ -3,6 +3,7 @@ import { PageHero } from '../components/layout/PageHero'
 import { CTASection } from '../components/layout/CTASection'
 import { FAQAccordion } from '../components/faq/FAQAccordion'
 import { ArchiveFilter } from '../components/archive/ArchiveFilter'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useI18n } from '../i18n'
 import type { FaqCategoryKey } from '../i18n/types'
 
@@ -11,6 +12,7 @@ const categoryKeys: FaqCategoryKey[] = ['all', 'beforeOrder', 'progress', 'tech'
 export function FAQPage() {
   const { dict, locale } = useI18n()
   const [category, setCategory] = useState<FaqCategoryKey>('all')
+  const ref = useScrollReveal<HTMLElement>({ staggerMs: 60 })
 
   useEffect(() => {
     setCategory('all')
@@ -24,6 +26,14 @@ export function FAQPage() {
     return dict.faq.items.filter((f) => f.category === category)
   }, [category, dict.faq.items])
 
+  useEffect(() => {
+    const container = ref.current
+    if (!container) return
+    container.querySelectorAll('.scroll-reveal:not(.is-visible)').forEach((el) => {
+      el.classList.add('is-visible')
+    })
+  }, [filtered])
+
   return (
     <>
       <PageHero
@@ -32,7 +42,7 @@ export function FAQPage() {
         breadcrumbs={[{ label: dict.faq.page.ja }]}
         variant="faq"
       />
-      <section className="py-16 md:py-24">
+      <section ref={ref} className="py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-4 md:px-6">
           <ArchiveFilter
             filters={filters}

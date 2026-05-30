@@ -23,6 +23,14 @@ export function BlogPage() {
     return dict.blog.items.filter((p) => p.category === filter)
   }, [filterIdx, filters, dict.blog.items])
 
+  useEffect(() => {
+    const container = ref.current
+    if (!container) return
+    container.querySelectorAll('.scroll-reveal:not(.is-visible)').forEach((el) => {
+      el.classList.add('is-visible')
+    })
+  }, [filtered])
+
   return (
     <>
       <PageHero
@@ -31,7 +39,7 @@ export function BlogPage() {
         breadcrumbs={[{ label: dict.blog.page.ja }]}
         variant="blog"
       />
-      <section className="py-16 md:py-24">
+      <section ref={ref} className="py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <ArchiveFilter
             filters={filters}
@@ -41,11 +49,14 @@ export function BlogPage() {
               if (idx >= 0) setFilterIdx(idx)
             }}
           />
-          <div ref={ref} className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {filtered.map((p) => (
               <BlogCard key={p.id} {...p} />
             ))}
           </div>
+          {filtered.length === 0 && (
+            <p className="py-12 text-center text-navy-700/60">{dict.common.noResults}</p>
+          )}
         </div>
       </section>
       <CTASection />

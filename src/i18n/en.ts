@@ -467,9 +467,21 @@ export const en: Dictionary = {
   company: {
     page: { en: 'Company', ja: 'About Us' },
     profile: { en: 'Profile', ja: 'Company Information' },
+    executives: [
+      {
+        id: 'ceo',
+        role: 'President & CEO',
+        roleEn: 'CEO',
+        name: 'Yuki Maeda',
+        initials: 'YM',
+        imageSrc: '/images/ceo-profile.png',
+        message:
+          'As your web development partner, we pursue quality, speed, and proactive proposals that drive business growth. From small projects to long-term partnerships — we welcome your inquiry.',
+      },
+    ],
     rows: [
       { label: 'Company Name', value: 'Nippon Systems Inc.' },
-      { label: 'Representative', value: 'Taro Yamada, President & CEO' },
+      { label: 'Representative', value: 'Yuki Maeda, President & CEO' },
       { label: 'Founded', value: 'April 2010' },
       { label: 'Capital', value: '¥30 million' },
       { label: 'Location (Tokyo)', value: '5F XX Building, 1-2-3 XX, Shibuya-ku, Tokyo' },

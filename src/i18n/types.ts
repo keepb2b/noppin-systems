@@ -134,6 +134,15 @@ export type Dictionary = {
   company: {
     page: { en: string; ja: string }
     profile: { en: string; ja: string }
+    executives: {
+      id: string
+      role: string
+      roleEn: string
+      name: string
+      message: string
+      initials: string
+      imageSrc?: string
+    }[]
     rows: { label: string; value: string }[]
   }
   contact: {

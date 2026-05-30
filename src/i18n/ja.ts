@@ -457,9 +457,21 @@ export const ja: Dictionary = {
   company: {
     page: { en: 'Company', ja: '会社概要' },
     profile: { en: 'Profile', ja: '会社情報' },
+    executives: [
+      {
+        id: 'ceo',
+        role: '代表取締役',
+        roleEn: 'CEO',
+        name: '前田 雄紀',
+        initials: 'YM',
+        imageSrc: '/images/ceo-profile.png',
+        message:
+          'お客様のビジネス成長に直結するWeb開発パートナーとして、品質・スピード・提案力の三立を追求しています。小さな案件から長期伴走まで、ぜひご相談ください。',
+      },
+    ],
     rows: [
       { label: '会社名', value: '株式会社日本システムズ' },
-      { label: '代表者', value: '代表取締役 山田 太郎' },
+      { label: '代表者', value: '代表取締役 前田 雄紀' },
       { label: '設立', value: '2010年4月' },
       { label: '資本金', value: '3,000万円' },
       { label: '所在地（東京）', value: '東京都渋谷区〇〇 1-2-3 〇〇ビル 5F' },
