@@ -3,6 +3,23 @@ import { SiteLoader } from '../components/effects/SiteLoader'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 const CRITICAL_IMAGES = ['/images/nippon-systems-logo.png', '/images/hero-bg.png']
+const LOADER_SEEN_KEY = 'nippon-systems-intro-seen'
+
+function hasSeenIntroLoader(): boolean {
+  try {
+    return sessionStorage.getItem(LOADER_SEEN_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+function markIntroLoaderSeen(): void {
+  try {
+    sessionStorage.setItem(LOADER_SEEN_KEY, '1')
+  } catch {
+    // sessionStorage unavailable
+  }
+}
 
 type LoadingContextValue = {
   complete: boolean
@@ -33,11 +50,12 @@ function waitForWindowLoad(): Promise<void> {
 
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const reduced = useReducedMotion()
-  const [ready, setReady] = useState(false)
-  const [visible, setVisible] = useState(!reduced)
+  const skipLoader = reduced || hasSeenIntroLoader()
+  const [ready, setReady] = useState(skipLoader)
+  const [visible, setVisible] = useState(!skipLoader)
 
   useEffect(() => {
-    if (reduced) {
+    if (skipLoader) {
       setReady(true)
       setVisible(false)
       return
@@ -65,9 +83,10 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
     return () => {
       cancelled = true
     }
-  }, [reduced])
+  }, [skipLoader])
 
   const handleComplete = useCallback(() => {
+    markIntroLoaderSeen()
     setVisible(false)
   }, [])
 
