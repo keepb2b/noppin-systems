@@ -7,7 +7,7 @@ export function Layout() {
   return (
     <>
       <GlobalHeader />
-      <main>
+      <main className="overflow-x-clip">
         <Outlet />
       </main>
       <GlobalFooter />

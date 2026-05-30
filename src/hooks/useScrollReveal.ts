@@ -29,22 +29,47 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(options:
       targets.push(el)
     }
 
+    const revealTarget = (target: HTMLElement) => {
+      const index = targets.indexOf(target)
+      const delay = index >= 0 ? index * staggerMs : 0
+      window.setTimeout(() => target.classList.add('is-visible'), delay)
+      observer.unobserve(target)
+    }
+
+    const isInViewport = (target: HTMLElement) => {
+      const rect = target.getBoundingClientRect()
+      return rect.top < window.innerHeight * 0.92 && rect.bottom > window.innerHeight * 0.08
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return
-          const target = entry.target as HTMLElement
-          const index = targets.indexOf(target)
-          const delay = index >= 0 ? index * staggerMs : 0
-          window.setTimeout(() => target.classList.add('is-visible'), delay)
-          observer.unobserve(target)
+          revealTarget(entry.target as HTMLElement)
         })
       },
       { threshold, rootMargin },
     )
 
-    targets.forEach((t) => observer.observe(t))
-    return () => observer.disconnect()
+    targets.forEach((t) => {
+      if (isInViewport(t)) {
+        revealTarget(t)
+        return
+      }
+      observer.observe(t)
+    })
+
+    const onScroll = () => {
+      targets.forEach((t) => {
+        if (!t.classList.contains('is-visible') && isInViewport(t)) revealTarget(t)
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', onScroll)
+    }
   }, [reduced, threshold, rootMargin, staggerMs])
 
   return ref

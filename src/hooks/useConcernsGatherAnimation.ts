@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useReducedMotion } from './useReducedMotion'
 
 gsap.registerPlugin(ScrollTrigger)
+ScrollTrigger.config({ ignoreMobileResize: true })
 
 type AnimationConfig = {
   pin: boolean
@@ -130,6 +131,13 @@ function setupAnimation(container: HTMLElement, config: AnimationConfig) {
       const sx = scatterX(side, config)
       const body = card.querySelector<HTMLElement>('.concern-card-body')
       const icon = card.querySelector<HTMLElement>('[data-concern-icon]')
+
+      if (scrollProgress >= config.scatterEnd) {
+        gsap.set(card, { clearProps: 'transform,opacity' })
+        if (body) gsap.set(body, { clearProps: 'width,opacity', width: 'auto' })
+        if (icon) gsap.set(icon, { clearProps: 'transform,opacity' })
+        return
+      }
 
       gsap.set(card, {
         x: sx * (1 - frame.x),

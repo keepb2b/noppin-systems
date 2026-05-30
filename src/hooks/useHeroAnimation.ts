@@ -21,7 +21,6 @@ export function useHeroAnimation(containerRef: RefObject<HTMLElement | null>) {
     }
 
     const ctx = gsap.context(() => {
-      gsap.from('[data-hero="header"]', { opacity: 0, y: -12, duration: 0.3, ease: 'power2.out' })
       gsap.from('[data-hero="bg"]', { opacity: 0, duration: 0.6, delay: 0.1, ease: 'power2.out' })
       gsap.from('[data-hero="line"]', {
         opacity: 0,

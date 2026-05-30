@@ -13,24 +13,21 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   }`
 
 const headerBtnClass =
-  '!shrink-0 !whitespace-nowrap !rounded-full !px-3 !py-2 !text-[11px] !leading-none 2xl:!px-4 2xl:!text-xs'
+  '!shrink-0 !whitespace-nowrap !rounded-full !px-2.5 !py-1.5 !text-[10px] !leading-none sm:!px-3 sm:!py-2 sm:!text-[11px] 2xl:!px-4 2xl:!text-xs [&_svg]:hidden sm:[&_svg]:block'
 
 export function GlobalHeader() {
   const [open, setOpen] = useState(false)
   const { dict } = useI18n()
 
   return (
-    <header
-      className="fixed top-0 right-0 left-0 z-50 border-b border-header-border bg-header-bg/95 text-navy-900 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset] backdrop-blur-md"
-      data-hero="header"
-    >
-      <div className="mx-auto flex h-14 max-w-[100rem] items-center gap-3 px-4 sm:gap-4 md:h-[4.25rem] md:px-6 lg:gap-5">
-        <Link to="/" className="header-logo-link flex shrink-0 items-center" aria-label="日本システムズ">
+    <header className="fixed top-0 right-0 left-0 isolate z-[60] border-b border-header-border bg-header-bg text-navy-900 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset] md:bg-header-bg/95 md:backdrop-blur-md">
+      <div className="mx-auto grid h-14 w-full min-w-0 max-w-[100rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 px-3 sm:gap-3 sm:px-4 md:h-[4.25rem] md:px-6 2xl:grid-cols-[auto_minmax(0,1fr)_auto]">
+        <Link to="/" className="header-logo-link flex min-w-0 items-center 2xl:col-start-1" aria-label="日本システムズ">
           <span className="header-logo-frame">
             <img
               src="/images/nippon-systems-logo.png"
               alt="日本システムズ"
-              className="header-logo-img h-8 w-auto max-w-[128px] object-contain object-left sm:h-9 sm:max-w-[148px] 2xl:h-10 2xl:max-w-[190px]"
+              className="header-logo-img h-7 w-auto max-w-[88px] object-contain object-left sm:h-9 sm:max-w-[148px] 2xl:h-10 2xl:max-w-[190px]"
               width={190}
               height={40}
             />
@@ -38,7 +35,7 @@ export function GlobalHeader() {
         </Link>
 
         <nav
-          className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 2xl:flex 2xl:gap-1"
+          className="hidden min-w-0 items-center justify-center gap-0.5 2xl:col-start-2 2xl:flex 2xl:gap-1"
           aria-label="Main navigation"
         >
           {navRoutes.map((item) => (
@@ -48,8 +45,8 @@ export function GlobalHeader() {
           ))}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <LanguageSwitcher className="shrink-0" tone="light" />
+        <div className="col-start-2 flex shrink-0 items-center gap-1 sm:gap-2 2xl:col-start-3">
+          <LanguageSwitcher className="shrink-0 max-[359px]:scale-90" tone="light" />
 
           <div className="hidden items-center gap-0.5 lg:flex">
             <a
@@ -77,7 +74,7 @@ export function GlobalHeader() {
             </a>
           </div>
 
-          <div className="hidden items-center gap-1.5 md:flex 2xl:gap-2">
+          <div className="flex items-center gap-1 sm:gap-1.5 2xl:gap-2">
             <Button
               to="/contact"
               variant="outline"
@@ -92,14 +89,14 @@ export function GlobalHeader() {
             >
               {dict.common.contact}
             </Button>
-            <Button to="/contact" variant="primary" className={headerBtnClass}>
+            <Button to="/contact" variant="primary" className={`${headerBtnClass} 2xl:!inline-flex`}>
               {dict.common.freeConsultShort}
             </Button>
           </div>
 
           <button
             type="button"
-            className="shrink-0 rounded-lg p-2 text-navy-800 2xl:hidden"
+            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-header-border p-2 text-navy-800 2xl:hidden"
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-label={dict.common.menu}

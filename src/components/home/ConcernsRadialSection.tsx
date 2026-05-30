@@ -170,7 +170,7 @@ export function ConcernsRadialSection() {
 
         <div
           ref={radialRef}
-          className="relative min-h-[32rem] md:min-h-[40rem] lg:min-h-[44rem]"
+          className="relative min-h-[32rem] overflow-x-clip md:min-h-[40rem] lg:min-h-[44rem]"
           data-concerns-stage
         >
           {/* Mobile: hub on top, then side-by-side lists. Desktop: hub centered between columns. */}
