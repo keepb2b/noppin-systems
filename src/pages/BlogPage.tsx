@@ -39,7 +39,7 @@ export function BlogPage() {
         breadcrumbs={[{ label: dict.blog.page.ja }]}
         variant="blog"
       />
-      <section ref={ref} className="py-16 md:py-24">
+      <section ref={ref} className="section-band-white section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <ArchiveFilter
             filters={filters}

@@ -17,7 +17,7 @@ export function StrengthsPage() {
         breadcrumbs={[{ label: dict.reasons.page.ja }]}
         variant="strengths"
       />
-      <section ref={ref} className="py-16 md:py-24">
+      <section ref={ref} className="section-band-white section-band-py">
         <div className="mx-auto max-w-6xl space-y-16 px-4 md:space-y-24 md:px-6">
           {dict.reasons.items.map((r, i) => (
             <NumberedReasonBlock

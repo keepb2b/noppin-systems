@@ -10,8 +10,8 @@ import { ConcernsRadialSection } from '../components/home/ConcernsRadialSection'
 import { ReasonsChosenSection } from '../components/home/ReasonsChosenSection'
 import { TestimonialsBand } from '../components/home/TestimonialsBand'
 import { PricingBlock } from '../components/shared/PricingBlock'
-import { WorkCard } from '../components/archive/WorkCard'
-import { AnimationCard } from '../components/archive/AnimationCard'
+import { WorkCaseStudyCard } from '../components/archive/WorkCaseStudyCard'
+import { flattenWorkCases, getWorkCaseGroups } from '../data/workCases'
 import { BlogCard } from '../components/archive/BlogCard'
 import { FAQAccordion } from '../components/faq/FAQAccordion'
 import { MovingLinesBg } from '../components/effects/MovingLinesBg'
@@ -21,11 +21,10 @@ import { useI18n } from '../i18n'
 
 export function HomePage() {
   const heroRef = useRef<HTMLElement>(null)
-  const { dict } = useI18n()
+  const { dict, locale } = useI18n()
   useHeroAnimation(heroRef)
   const servicesRef = useScrollReveal<HTMLElement>({ staggerMs: 80 })
   const worksRef = useScrollReveal<HTMLElement>({ staggerMs: 80 })
-  const animRef = useScrollReveal<HTMLElement>({ staggerMs: 80 })
   const faqRef = useScrollReveal<HTMLElement>()
   const blogRef = useScrollReveal<HTMLElement>({ staggerMs: 80 })
   const companyRef = useScrollReveal<HTMLElement>()
@@ -72,7 +71,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section ref={numbersRef} className="border-b border-sand-200 bg-sand-100 py-16 md:py-20">
+      <section ref={numbersRef} className="section-band-washi-deep section-band-py-compact">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid gap-6 md:grid-cols-3">
             {achievementValues.map((a, i) => (
@@ -96,7 +95,7 @@ export function HomePage() {
 
       <ReasonsChosenSection />
 
-      <section ref={servicesRef} className="py-16 md:py-24">
+      <section ref={servicesRef} className="section-band-white section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.servicesPreview.en} ja={dict.home.servicesPreview.ja} />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -119,7 +118,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-sand-200 bg-sand-50 py-16 md:py-24">
+      <section className="section-band-washi section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.price.en} ja={dict.home.price.ja} />
           <PricingBlock compact />
@@ -129,13 +128,32 @@ export function HomePage() {
         </div>
       </section>
 
-      <section ref={worksRef} className="py-16 md:py-24">
+      <section ref={worksRef} className="section-band-white section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.works.en} ja={dict.home.works.ja} />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {dict.works.items.slice(0, 6).map((w) => (
-              <WorkCard key={w.id} {...w} />
-            ))}
+            {flattenWorkCases(getWorkCaseGroups(locale))
+              .slice(0, 6)
+              .map((w) => (
+                <WorkCaseStudyCard
+                  key={w.id}
+                  serviceNumber={w.serviceNumber}
+                  serviceTitle={w.serviceTitle}
+                  title={w.title}
+                  challenge={w.challenge}
+                  technicalDifficulty={w.technicalDifficulty}
+                  solution={w.solution}
+                  result={w.result}
+                  compact
+                  labels={{
+                    highDifficulty: dict.works.highDifficulty,
+                    challenge: dict.works.challenge,
+                    technicalDifficulty: dict.works.technicalDifficulty,
+                    solution: dict.works.solution,
+                    result: dict.works.result,
+                  }}
+                />
+              ))}
           </div>
           <div className="mt-10 text-center">
             <Button to="/works" variant="primary">{dict.home.works.viewAll}</Button>
@@ -143,23 +161,9 @@ export function HomePage() {
         </div>
       </section>
 
-      <section ref={animRef} className="bg-navy-950 py-16 text-white md:py-24">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <SectionTitle en={dict.home.animation.en} ja={dict.home.animation.ja} light />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {dict.animation.items.slice(0, 6).map((a) => (
-              <AnimationCard key={a.id} {...a} />
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Button to="/animation" variant="primary">{dict.home.animation.viewAll}</Button>
-          </div>
-        </div>
-      </section>
-
       <TestimonialsBand />
 
-      <section ref={faqRef} className="bg-sand-100 py-16 md:py-24">
+      <section ref={faqRef} className="section-band-white section-band-py">
         <div className="mx-auto max-w-3xl px-4 md:px-6">
           <SectionTitle en={dict.home.faq.en} ja={dict.home.faq.ja} align="center" />
           <FAQAccordion items={dict.faq.items.slice(0, 4)} />
@@ -169,7 +173,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section ref={blogRef} className="py-16 md:py-24">
+      <section ref={blogRef} className="section-band-washi section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.blog.en} ja={dict.home.blog.ja} />
           <div className="grid gap-6 md:grid-cols-3">
@@ -183,7 +187,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section ref={companyRef} className="border-t border-sand-200 bg-sand-50 py-16 md:py-24">
+      <section ref={companyRef} className="section-band-white section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.company.en} ja={dict.home.company.ja} />
           <div className="scroll-reveal grid items-center gap-10 md:grid-cols-2">

@@ -1,6 +1,8 @@
-import type { Dictionary } from '../../i18n/types'
-
-type WorkItem = Dictionary['works']['items'][number]
+type WorkItem = {
+  title: string
+  categories: string[]
+  badge?: string
+}
 
 export function WorkCard({ title, categories, badge }: WorkItem) {
   return (

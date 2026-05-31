@@ -75,7 +75,7 @@ export function ReasonsChosenSection() {
   const { section, items } = dict.reasons
 
   return (
-    <section id="reasons" className="page-section relative overflow-hidden bg-sand-50 py-16 md:py-24">
+    <section id="reasons" className="page-section section-band-washi section-band-py relative overflow-hidden">
       <div
         className="pointer-events-none absolute bottom-0 left-0 h-[45%] w-[55%] bg-sand-100"
         style={{ clipPath: 'polygon(0 100%, 0 0, 100% 100%)' }}

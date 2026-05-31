@@ -42,7 +42,7 @@ export function FAQPage() {
         breadcrumbs={[{ label: dict.faq.page.ja }]}
         variant="faq"
       />
-      <section ref={ref} className="py-16 md:py-24">
+      <section ref={ref} className="section-band-white section-band-py">
         <div className="mx-auto max-w-3xl px-4 md:px-6">
           <ArchiveFilter
             filters={filters}

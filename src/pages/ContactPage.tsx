@@ -12,7 +12,7 @@ export function ContactPage() {
         ja={dict.contact.page.ja}
         breadcrumbs={[{ label: dict.contact.page.ja }]}
       />
-      <section className="py-16 md:py-24">
+      <section className="section-band-white section-band-py">
         <div className="mx-auto max-w-xl px-4 md:px-6">
           <form
             className="space-y-6"

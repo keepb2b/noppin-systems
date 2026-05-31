@@ -10,7 +10,6 @@ export type NavKey =
   | 'fee'
   | 'faq'
   | 'works'
-  | 'animation'
   | 'blog'
   | 'staff'
   | 'company'
@@ -67,7 +66,6 @@ export type Dictionary = {
     servicesPreview: { en: string; ja: string; viewAll: string }
     price: { en: string; ja: string; viewDetail: string }
     works: { en: string; ja: string; viewAll: string }
-    animation: { en: string; ja: string; viewAll: string }
     faq: { en: string; ja: string; viewAll: string }
     blog: { en: string; ja: string; viewAll: string }
     company: { en: string; ja: string; desc: string; viewAll: string }
@@ -113,14 +111,12 @@ export type Dictionary = {
   works: {
     page: { en: string; ja: string }
     label: string
-    filters: string[]
-    items: { id: string; title: string; categories: string[]; badge?: string }[]
-  }
-  animation: {
-    page: { en: string; ja: string }
-    label: string
-    filters: string[]
-    items: { id: string; title: string; category: string; description: string }[]
+    filterAll: string
+    highDifficulty: string
+    challenge: string
+    technicalDifficulty: string
+    solution: string
+    result: string
   }
   blog: {
     page: { en: string; ja: string }

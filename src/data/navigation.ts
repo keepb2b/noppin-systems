@@ -6,7 +6,6 @@ export const navRoutes: { key: NavKey; path: string }[] = [
   { key: 'fee', path: '/fee' },
   { key: 'faq', path: '/faq' },
   { key: 'works', path: '/works' },
-  { key: 'animation', path: '/animation' },
   { key: 'blog', path: '/blog' },
   { key: 'staff', path: '/staff' },
   { key: 'company', path: '/company' },
@@ -18,7 +17,6 @@ export const footerRoutes: { key: NavKey; path: string }[] = [
   { key: 'services', path: '/services' },
   { key: 'fee', path: '/fee' },
   { key: 'works', path: '/works' },
-  { key: 'animation', path: '/animation' },
   { key: 'blog', path: '/blog' },
   { key: 'company', path: '/company' },
 ]

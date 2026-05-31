@@ -27,7 +27,7 @@ export function CompanyPage() {
         breadcrumbs={[{ label: dict.company.page.ja }]}
         variant="company"
       />
-      <section ref={ref} className="py-16 md:py-24">
+      <section ref={ref} className="section-band-white section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.company.profile.en} ja={dict.company.profile.ja} align="center" />
           <div className="mx-auto mt-10 max-w-md">
