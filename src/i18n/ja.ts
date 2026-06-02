@@ -408,8 +408,6 @@ export const ja: Dictionary = {
         role: '代表取締役',
         roleEn: 'CEO',
         name: '前田 雄紀',
-        initials: 'YM',
-        imageSrc: '/images/ceo-profile.png',
         message:
           'お客様のビジネス成長に直結するWeb開発パートナーとして、品質・スピード・提案力の三立を追求しています。小さな案件から長期伴走まで、ぜひご相談ください。',
       },

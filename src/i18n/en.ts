@@ -418,8 +418,6 @@ export const en: Dictionary = {
         role: 'President & CEO',
         roleEn: 'CEO',
         name: 'Yuki Maeda',
-        initials: 'YM',
-        imageSrc: '/images/ceo-profile.png',
         message:
           'As your web development partner, we pursue quality, speed, and proactive proposals that drive business growth. From small projects to long-term partnerships — we welcome your inquiry.',
       },

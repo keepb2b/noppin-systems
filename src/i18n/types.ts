@@ -136,8 +136,6 @@ export type Dictionary = {
       roleEn: string
       name: string
       message: string
-      initials: string
-      imageSrc?: string
     }[]
     rows: { label: string; value: string }[]
   }

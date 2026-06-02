@@ -69,14 +69,16 @@ export function SiteLoader({ ready, onComplete }: Props) {
     <div ref={rootRef} className="site-loader" role="status" aria-live="polite" aria-label="Loading">
       <div className="site-loader-line-bg" aria-hidden />
       <div className="site-loader-inner">
-        <img
-          src="/images/nippon-systems-logo.png"
-          alt=""
-          className="site-loader-logo"
-          width={360}
-          height={78}
-          decoding="async"
-        />
+        <span className="site-loader-logo-frame">
+          <img
+            src="/images/nippon-systems-logo.png"
+            alt=""
+            className="site-loader-logo"
+            width={360}
+            height={78}
+            decoding="async"
+          />
+        </span>
         <div className="site-loader-bar" aria-hidden>
           <div ref={barRef} className="site-loader-bar-fill" />
         </div>
