@@ -37,7 +37,7 @@ export function HomePage() {
     <>
       <section
         ref={heroRef}
-        className="hero-home-bg page-section relative min-h-[100dvh] w-full overflow-hidden bg-navy-950 pt-24 pb-[min(42vw,14rem)] text-white md:min-h-screen md:pb-20"
+        className="hero-home-bg page-section relative min-h-[100dvh] w-full overflow-hidden bg-navy-950 pt-24 pb-16 text-white md:min-h-screen md:pb-20"
       >
         <MovingLinesBg />
         <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-coral-500/20 blur-3xl" data-hero="bg" />
@@ -48,7 +48,7 @@ export function HomePage() {
             {dict.home.heroEyebrow}
           </p>
           <h1
-            className="mt-4 max-w-4xl text-2xl font-bold leading-snug font-serif md:text-4xl md:leading-snug lg:text-5xl lg:leading-snug xl:text-6xl xl:leading-tight"
+            className="mt-4 max-w-4xl text-2xl font-bold leading-snug font-serif md:text-4xl md:leading-snug lg:text-4xl lg:leading-snug xl:text-5xl xl:leading-tight"
             data-hero="line"
           >
             <HeroTitleAnimation text={dict.home.heroTitle1} />

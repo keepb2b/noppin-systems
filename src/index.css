@@ -1156,20 +1156,23 @@
     outline-offset: 3px;
   }
 
-  /* Mobile portrait: tall crop, focus on center of image */
+  /* ── Hero background ── */
+
+  /* All mobile (portrait & landscape): cover fills the section, no gaps ever */
   .hero-home-bg {
     background-color: var(--color-navy-950);
     background-image: url('/images/hero-bg-mobile.png');
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
     background-attachment: scroll;
+    background-size: cover;
+    /* anchor upper-center so faces/content stay visible on tall narrow phones */
+    background-position: center 20%;
   }
 
-  /* Mobile landscape */
-  @media (min-width: 480px) and (max-width: 767px) {
+  /* Landscape phones — shift focal point to center */
+  @media (max-width: 767px) and (orientation: landscape) {
     .hero-home-bg {
-      background-position: center 30%;
+      background-position: center center;
     }
   }
 
@@ -1204,19 +1207,18 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    /* Mobile: top-to-bottom fade so text stays legible over the image */
+    /* Mobile: top-heavy dark fade so text stays legible */
     background: linear-gradient(
       to bottom,
-      rgb(20 31 40 / 0.80) 0%,
-      rgb(20 31 40 / 0.55) 35%,
-      rgb(20 31 40 / 0.30) 60%,
-      rgb(20 31 40 / 0.20) 100%
+      rgb(20 31 40 / 0.82) 0%,
+      rgb(20 31 40 / 0.58) 35%,
+      rgb(20 31 40 / 0.32) 60%,
+      rgb(20 31 40 / 0.22) 100%
     );
   }
 
   @media (min-width: 768px) {
     .hero-home-bg::before {
-      /* Tablet+: left-to-right fade — text left, image right */
       background: linear-gradient(
         to right,
         rgb(20 31 40 / 0.85) 0%,
