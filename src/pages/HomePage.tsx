@@ -5,6 +5,8 @@ import { Button } from '../components/ui/Button'
 import { SectionTitle } from '../components/ui/SectionTitle'
 import { CTASection } from '../components/layout/CTASection'
 import { HeroTagList } from '../components/home/HeroTagList'
+import { HeroTitleAnimation } from '../components/home/HeroTitleAnimation'
+import { HeroDescAnimation } from '../components/home/HeroDescAnimation'
 import { AchievementNumber } from '../components/home/AchievementNumber'
 import { ConcernsRadialSection } from '../components/home/ConcernsRadialSection'
 import { ReasonsChosenSection } from '../components/home/ReasonsChosenSection'
@@ -12,6 +14,7 @@ import { TestimonialsBand } from '../components/home/TestimonialsBand'
 import { PricingBlock } from '../components/shared/PricingBlock'
 import { WorkCaseStudyCard } from '../components/archive/WorkCaseStudyCard'
 import { flattenWorkCases, getWorkCaseGroups } from '../data/workCases'
+import { getBlogPosts } from '../data/blogPosts'
 import { BlogCard } from '../components/archive/BlogCard'
 import { FAQAccordion } from '../components/faq/FAQAccordion'
 import { MovingLinesBg } from '../components/effects/MovingLinesBg'
@@ -45,19 +48,19 @@ export function HomePage() {
             {dict.home.heroEyebrow}
           </p>
           <h1
-            className="mt-4 max-w-4xl text-2xl font-bold leading-snug md:text-3xl md:leading-snug lg:text-4xl lg:leading-snug"
+            className="mt-4 max-w-4xl text-2xl font-bold leading-snug font-serif md:text-4xl md:leading-snug lg:text-5xl lg:leading-snug xl:text-6xl xl:leading-tight"
             data-hero="line"
           >
-            {dict.home.heroTitle1}
+            <HeroTitleAnimation text={dict.home.heroTitle1} />
             {dict.home.heroTitle2 ? (
               <>
                 <br />
-                {dict.home.heroTitle2}
+                <HeroTitleAnimation text={dict.home.heroTitle2} />
               </>
             ) : null}
           </h1>
           <p className="mt-6 max-w-xl text-white/70" data-hero="line">
-            {dict.home.heroDesc}
+            <HeroDescAnimation text={dict.home.heroDesc} />
           </p>
           <HeroTagList />
           <div className="mt-10 flex flex-wrap gap-4" data-hero="cta">
@@ -177,7 +180,7 @@ export function HomePage() {
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.blog.en} ja={dict.home.blog.ja} />
           <div className="grid gap-6 md:grid-cols-3">
-            {dict.blog.items.map((p) => (
+            {getBlogPosts(locale).slice(0, 3).map((p) => (
               <BlogCard key={p.id} {...p} />
             ))}
           </div>

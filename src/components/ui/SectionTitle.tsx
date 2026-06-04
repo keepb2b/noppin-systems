@@ -16,7 +16,7 @@ export function SectionTitle({ en, ja, align = 'left', light = false }: SectionT
         {en}
       </p>
       <h2
-        className={`mt-2 font-display text-2xl font-bold tracking-tight md:text-4xl ${
+        className={`mt-2 font-serif text-2xl font-bold tracking-tight md:text-4xl ${
           light ? 'text-white' : 'text-navy-900'
         }`}
       >

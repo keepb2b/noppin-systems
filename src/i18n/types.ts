@@ -120,8 +120,7 @@ export type Dictionary = {
   }
   blog: {
     page: { en: string; ja: string }
-    filters: string[]
-    items: { id: string; title: string; date: string; category: string; excerpt: string }[]
+    stack: { en: string; ja: string; subtitle: string }
   }
   staff: {
     page: { en: string; ja: string }

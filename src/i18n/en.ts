@@ -373,30 +373,11 @@ export const en: Dictionary = {
   },
   blog: {
     page: { en: 'Blog', ja: 'Development Blog' },
-    filters: ['All', 'Technical', 'E-Commerce', 'CMS', 'Animation', 'Operations'],
-    items: [
-      {
-        id: '1',
-        title: 'Building a Fast Corporate Site with Next.js 15 and Headless CMS',
-        date: '2026.05.20',
-        category: 'Technical',
-        excerpt: 'Key performance optimization strategies for Jamstack architecture.',
-      },
-      {
-        id: '2',
-        title: '5 Essentials for Shopify Liquid Theme Updates',
-        date: '2026.05.12',
-        category: 'E-Commerce',
-        excerpt: 'Implementation considerations when refreshing an existing store design.',
-      },
-      {
-        id: '3',
-        title: 'Designing Scroll Effects with GSAP ScrollTrigger',
-        date: '2026.05.01',
-        category: 'Animation',
-        excerpt: 'Patterns that enhance experience without excessive motion.',
-      },
-    ],
+    stack: {
+      en: 'TECH STACK',
+      ja: 'Technology Stack',
+      subtitle: 'Core technologies and tools we use in production, organized by service area.',
+    },
   },
   staff: {
     page: { en: 'Staff', ja: 'Our Team' },

@@ -12,7 +12,7 @@ export function CTASection() {
         <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-coral-400">
           {dict.cta.labelEn}
         </p>
-        <h2 className="mt-3 text-2xl font-bold text-white md:text-3xl">{dict.cta.title}</h2>
+        <h2 className="mt-3 font-serif text-2xl font-bold text-white md:text-3xl">{dict.cta.title}</h2>
         <p className="mt-4 text-lg font-semibold text-white">
           <a href="tel:03-1234-5678" className="hover:text-coral-400 transition-colors">
             03-1234-5678

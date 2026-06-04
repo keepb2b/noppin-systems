@@ -21,7 +21,7 @@ export function GlobalFooter() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <p className="font-display text-xs uppercase tracking-widest text-coral-400">{dict.cta.labelEn}</p>
-            <p className="mt-2 text-2xl font-bold text-white">{dict.cta.title}</p>
+            <p className="mt-2 font-serif text-2xl font-bold text-white">{dict.cta.title}</p>
             <p className="mt-4 text-xl font-semibold text-white">
               <a href="tel:03-1234-5678" className="hover:text-coral-400">03-1234-5678</a>
             </p>

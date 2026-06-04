@@ -2,8 +2,9 @@
 
 /* 和風 B2B palette — 紺(kon) · 朱(shu) · 生成り(washi) · 藍染(aizome) */
 @theme {
-  --font-sans: 'Noto Sans JP', 'DM Sans', system-ui, sans-serif;
-  --font-display: 'DM Sans', 'Noto Sans JP', system-ui, sans-serif;
+  --font-sans: 'Noto Sans JP', system-ui, sans-serif;
+  --font-display: 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
 
   /* 紺 — deep indigo trusted in Japanese corporate design */
   --color-navy-950: #141f28;
@@ -255,6 +256,106 @@
     .service-image-card:hover,
     .service-image-card--reverse:hover {
       transform: none;
+    }
+  }
+
+  .blog-card-image {
+    isolation: isolate;
+  }
+
+  .blog-card-flow {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: soft-light;
+    background-image: repeating-linear-gradient(
+      -14deg,
+      transparent,
+      transparent 36px,
+      rgb(255 255 255 / 0.55) 36px,
+      rgb(255 255 255 / 0.55) 37px
+    );
+    animation: line-drift 18s linear infinite;
+  }
+
+  .blog-card-flow-shimmer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .blog-card-flow-shimmer::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -120%;
+    width: 55%;
+    height: 220%;
+    background: linear-gradient(
+      105deg,
+      transparent 38%,
+      rgb(255 255 255 / 0.22) 50%,
+      transparent 62%
+    );
+    animation: blog-card-shimmer 5s ease-in-out infinite;
+  }
+
+  .blog-card-image::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(232 93 74 / 0.85),
+      rgb(126 176 196 / 0.85),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: blog-card-flowline 3.5s linear infinite;
+  }
+
+  @keyframes blog-card-shimmer {
+    0%,
+    100% {
+      transform: translateX(0) rotate(12deg);
+      opacity: 0;
+    }
+    45% {
+      opacity: 1;
+    }
+    55% {
+      transform: translateX(420%) rotate(12deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes blog-card-flowline {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-card-flow,
+    .blog-card-flow-shimmer::before,
+    .blog-card-image::after {
+      animation: none;
+    }
+
+    .blog-card-flow-shimmer::before {
+      opacity: 0;
     }
   }
 
@@ -1055,27 +1156,44 @@
     outline-offset: 3px;
   }
 
+  /* Mobile portrait: tall crop, focus on center of image */
   .hero-home-bg {
     background-color: var(--color-navy-950);
-    background-image: url('/images/hero-bg.png');
+    background-image: url('/images/hero-bg-mobile.png');
     background-repeat: no-repeat;
-    /* Mobile: scale to viewport width, anchor illustration at bottom */
-    background-size: 100% auto;
-    background-position: center bottom;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: scroll;
   }
 
-  @media (min-width: 768px) {
+  /* Mobile landscape */
+  @media (min-width: 480px) and (max-width: 767px) {
     .hero-home-bg {
-      /* Tablet / small desktop: cover the section, bias image to the right */
-      background-size: cover;
-      background-position: 75% center;
+      background-position: center 30%;
     }
   }
 
+  /* Tablet */
+  @media (min-width: 768px) {
+    .hero-home-bg {
+      background-image: url('/images/hero-bg.png');
+      background-size: cover;
+      background-position: 60% center;
+    }
+  }
+
+  /* Small desktop */
   @media (min-width: 1024px) {
     .hero-home-bg {
-      /* Desktop: full-bleed cover aligned to the right illustration */
+      background-image: url('/images/hero-bg.png');
       background-size: cover;
+      background-position: 70% center;
+    }
+  }
+
+  /* Large desktop */
+  @media (min-width: 1280px) {
+    .hero-home-bg {
       background-position: right center;
     }
   }
@@ -1086,24 +1204,37 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    /* Mobile: darken top for headline; leave bottom art visible */
+    /* Mobile: top-to-bottom fade so text stays legible over the image */
     background: linear-gradient(
       to bottom,
-      rgb(20 31 40 / 0.94) 0%,
-      rgb(20 31 40 / 0.72) 38%,
-      rgb(20 31 40 / 0.35) 62%,
-      transparent 88%
+      rgb(20 31 40 / 0.80) 0%,
+      rgb(20 31 40 / 0.55) 35%,
+      rgb(20 31 40 / 0.30) 60%,
+      rgb(20 31 40 / 0.20) 100%
     );
   }
 
   @media (min-width: 768px) {
     .hero-home-bg::before {
+      /* Tablet+: left-to-right fade — text left, image right */
       background: linear-gradient(
         to right,
-        rgb(20 31 40 / 0.9) 0%,
-        rgb(20 31 40 / 0.55) 42%,
-        rgb(20 31 40 / 0.2) 58%,
-        transparent 72%
+        rgb(20 31 40 / 0.85) 0%,
+        rgb(20 31 40 / 0.55) 40%,
+        rgb(20 31 40 / 0.20) 60%,
+        transparent 75%
+      );
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-home-bg::before {
+      background: linear-gradient(
+        to right,
+        rgb(20 31 40 / 0.80) 0%,
+        rgb(20 31 40 / 0.45) 38%,
+        rgb(20 31 40 / 0.10) 55%,
+        transparent 68%
       );
     }
   }
