@@ -401,6 +401,76 @@ export const en: Dictionary = {
         answer:
           'We focus not only on coding, but also on business results. Our goal is to build reliable digital systems that improve efficiency, increase sales, and help businesses grow faster. We provide practical implementation, stable development, and flexible technical support for agencies and business owners.',
       },
+      {
+        id: '013',
+        category: 'tech',
+        question: 'Can you handle Japanese e-commerce platforms?',
+        answer:
+          'Yes. We support Japanese e-commerce platforms such as EC-CUBE, EC-force, Color Me Shop, and Makeshop. We can assist with product management, payment/shipping settings, design adjustments, customization, and external integrations.',
+      },
+      {
+        id: '014',
+        category: 'tech',
+        question: 'Can you develop with React or Next.js?',
+        answer:
+          'Yes. We develop fast, scalable websites and web applications using React and Next.js. We also support headless CMS integration, API connections, animation implementation, and admin panel development.',
+      },
+      {
+        id: '015',
+        category: 'tech',
+        question: 'Do you support headless CMS?',
+        answer:
+          'Yes. We support headless CMS platforms such as microCMS, Contentful, and Strapi. This approach is ideal when you want both easy content management and fast page load speeds.',
+      },
+      {
+        id: '016',
+        category: 'tech',
+        question: 'Can you develop AI-powered systems?',
+        answer:
+          'Yes. We develop AI-powered solutions such as AI chatbots, inquiry support automation, content generation, business process automation, internal knowledge search, data organization, and AI-integrated tools. We propose practical AI applications tailored to your existing workflows.',
+      },
+      {
+        id: '017',
+        category: 'tech',
+        question: 'Can you implement web animations?',
+        answer:
+          'Yes. We implement motion and animations using GSAP, CSS animations, and JavaScript to enhance brand image and user experience. We ensure animations are not overly heavy and maintain good page load speed and usability.',
+      },
+      {
+        id: '018',
+        category: 'fee',
+        question: 'How are fees determined?',
+        answer:
+          'Fees vary based on scope, number of pages, number of features, whether design is included, complexity of CMS or e-commerce functionality, external integrations, timeline, and other factors. After reviewing your requirements, we organize the necessary work and provide a clear estimate.',
+      },
+      {
+        id: '019',
+        category: 'fee',
+        question: 'Can you provide a quote in advance?',
+        answer:
+          'Yes. After reviewing your consultation request, we organize the scope, timeline, and costs to provide an estimate. If needed, we can also propose a phased approach starting with high-priority tasks.',
+      },
+      {
+        id: '020',
+        category: 'fee',
+        question: 'Can I consult with a fixed budget in mind?',
+        answer:
+          'Yes. We can organize priorities and scope to fit your budget and propose a realistic approach. Instead of building everything at once, we can start with essential components and expand in phases.',
+      },
+      {
+        id: '021',
+        category: 'fee',
+        question: 'Can I request just small fixes?',
+        answer:
+          'Yes. We accept small-scale work such as minor fixes, page additions, display corrections, CMS configuration, and partial Shopify adjustments. When the scope is clear, we may be able to complete the work quickly with a small budget.',
+      },
+      {
+        id: '022',
+        category: 'fee',
+        question: 'Do you offer maintenance and operation support plans?',
+        answer:
+          'Yes. We can provide ongoing maintenance and operation support. Based on your needs — such as site updates, minor fixes, bug fixes, CMS management, e-commerce operation support, and feature improvements — we can propose monthly plans or spot support.',
+      },
     ],
   },
   works: {
