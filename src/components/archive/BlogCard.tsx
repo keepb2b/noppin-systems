@@ -1,35 +1,44 @@
 import type { BlogPost } from '../../data/blogPosts'
 
-type Props = BlogPost
+type Props = BlogPost & { onClick?: () => void }
 
-export function BlogCard({ title, date, category, excerpt, image, serviceNumber }: Props) {
+export function BlogCard({ title, date, category, image, onClick }: Props) {
   return (
-    <article
-      className="scroll-reveal group flex flex-col overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+    /* outer wrapper gives room for the image to overflow upward */
+    <div
+      className="scroll-reveal group relative pt-8 cursor-pointer"
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
       data-cursor-hover
     >
-      <div className="blog-card-image relative aspect-[16/9] overflow-hidden bg-navy-900">
-        <img
-          src={image}
-          alt={title}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          loading="lazy"
-        />
-        <div className="blog-card-flow" aria-hidden />
-        <div className="blog-card-flow-shimmer" aria-hidden />
-        <span className="absolute top-3 left-3 z-10 rounded-full bg-navy-950/75 px-2.5 py-1 text-[10px] font-bold tracking-wider text-white backdrop-blur-sm">
-          {serviceNumber}
-        </span>
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/50 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-      </div>
-      <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-3 text-xs text-navy-700/60">
-          <time dateTime={date.replace(/\./g, '-')}>{date}</time>
-          <span className="rounded-full bg-coral-500/10 px-2 py-0.5 font-medium text-coral-600">{category}</span>
+      {/* Card body — wide rectangle */}
+      <article className="relative overflow-visible rounded-2xl border border-navy-800 bg-navy-900 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg min-h-[120px] flex items-center pr-[44%] pl-5 py-5">
+
+        {/* Left text */}
+        <div className="flex flex-col justify-center">
+          <h3 className="text-sm font-bold leading-snug text-white transition-colors group-hover:text-coral-400 md:text-[0.9375rem]">
+            {title}
+          </h3>
+          <div className="mt-3 flex items-center gap-2 text-xs text-white/50">
+            <time dateTime={date.replace(/\./g, '-')}>{date.replace(/\./g, '-')}</time>
+            <span className="rounded border border-white/20 bg-white/10 px-2 py-0.5 font-medium text-white/75">
+              {category}
+            </span>
+          </div>
         </div>
-        <h3 className="mt-3 font-semibold text-navy-900 transition-colors group-hover:text-coral-500">{title}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-navy-700/75">{excerpt}</p>
-      </div>
-    </article>
+
+        {/* Image — overflows top, has bottom gap inside card */}
+        <div className="pointer-events-none absolute -top-4 right-2 h-[calc(100%-1.5rem)] w-[42%] overflow-hidden rounded-xl shadow-md transition-transform duration-500 group-hover:scale-[1.03]">
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </article>
+    </div>
   )
 }

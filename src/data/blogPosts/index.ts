@@ -31,6 +31,7 @@ export function getBlogPosts(locale: Locale): BlogPost[] {
       categoryKey: entry.categoryKey,
       excerpt: entry.excerpt,
       image: serviceImages[index],
+      description: entry.description,
     }
   })
 }

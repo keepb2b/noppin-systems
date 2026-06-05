@@ -319,45 +319,87 @@ export const en: Dictionary = {
     items: [
       {
         id: '001',
-        category: 'beforeOrder',
-        question: 'Can we meet in person before placing an order?',
+        category: 'tech',
+        question: 'What kind of services do you provide?',
         answer:
-          'Yes. We offer consultations at our Tokyo or Osaka offices, or online. Please share your preferred date and time via the contact form.',
+          'We provide technical implementation and development support for websites, online stores, CMS platforms, business systems, and AI-powered solutions. Our main services include WordPress, Shopify, EC-CUBE, EC-force, Color Me Shop, Makeshop, MovableType, headless CMS, React/Next.js, web animation, and AI system development.',
       },
       {
         id: '002',
-        category: 'progress',
-        question: 'Can you attend our client meetings?',
+        category: 'beforeOrder',
+        question: 'Can you work as a development partner for agencies?',
         answer:
-          'Depending on project scope and your needs, we can join progress and review meetings, providing technical explanations and schedule coordination.',
+          'Yes. We can support agencies as a technical coding partner. We handle implementation, customization, system development, CMS setup, e-commerce development, and technical support behind the scenes, allowing agencies to focus on client communication and project management.',
       },
       {
         id: '003',
         category: 'tech',
-        question: 'Do you support responsive coding?',
+        question: 'Do you support Shopify development?',
         answer:
-          'Multi-device support for smartphone, tablet, and desktop is standard. Breakpoints and display specs are agreed upon in advance.',
+          'Yes. We support Shopify store setup, theme customization, section development, product page optimization, app integration, CSV import/export support, and operational improvements for online stores.',
       },
       {
         id: '004',
         category: 'tech',
-        question: 'Can we request landing page coding only?',
+        question: 'Can you build Japanese e-commerce sites?',
         answer:
-          'Yes. We accept standalone LP coding. Provide design files (Figma, XD, Photoshop, etc.) and we can proceed.',
+          'Yes. We support Japanese e-commerce platforms such as EC-CUBE, EC-force, Color Me Shop, Makeshop, and Shopify. We can assist with store design, product registration flow, payment/shipping settings, CMS integration, and custom development.',
       },
       {
         id: '005',
         category: 'tech',
-        question: 'Can you build or modify WordPress sites?',
+        question: 'Do you support WordPress websites?',
         answer:
-          'We cover theme development, plugin selection, custom fields, and existing site updates across a wide range of needs.',
+          'Yes. We build and customize WordPress websites, including corporate sites, landing pages, media sites, blogs, service pages, and CMS-based websites. We also support theme customization, plugin setup, responsive design, and performance improvement.',
       },
       {
         id: '006',
-        category: 'fee',
-        question: 'How are estimates calculated?',
+        category: 'tech',
+        question: 'Can you develop modern front-end websites?',
         answer:
-          'We provide estimates based on labor (hourly rate) or by page/feature unit. PM fees are typically an additional 20%. See the pricing page for details.',
+          'Yes. We develop modern front-end websites using React, Next.js, headless CMS, and web animation technologies. We can create fast, scalable, and visually engaging websites suitable for corporate branding, landing pages, and digital services.',
+      },
+      {
+        id: '007',
+        category: 'tech',
+        question: 'Do you provide AI-powered solutions?',
+        answer:
+          'Yes. We develop AI-powered solutions such as AI chatbots, workflow automation, content generation tools, internal business support systems, and AI integration with existing websites or platforms.',
+      },
+      {
+        id: '008',
+        category: 'tech',
+        question: 'Can you handle both design and coding?',
+        answer:
+          'Yes. We can support both design implementation and coding. If you already have a design file, we can accurately convert it into a responsive website. If you need improvement suggestions, we can also propose better UI, layout, animation, and user flow ideas.',
+      },
+      {
+        id: '009',
+        category: 'tech',
+        question: 'Do you support responsive design?',
+        answer:
+          'Yes. All websites and systems can be developed with responsive design for desktop, tablet, and smartphone users. We focus on usability, readability, loading speed, and conversion-friendly layouts.',
+      },
+      {
+        id: '010',
+        category: 'tech',
+        question: 'Can you customize existing websites or systems?',
+        answer:
+          'Yes. We can improve, repair, customize, or extend existing websites and systems. This includes layout fixes, feature additions, CMS improvements, e-commerce adjustments, animation updates, and system integration.',
+      },
+      {
+        id: '011',
+        category: 'progress',
+        question: 'Can you support long-term development?',
+        answer:
+          'Yes. We can work as a long-term technical partner for continuous website updates, system improvements, e-commerce operation support, maintenance, and new feature development.',
+      },
+      {
+        id: '012',
+        category: 'beforeOrder',
+        question: 'What makes your company different?',
+        answer:
+          'We focus not only on coding, but also on business results. Our goal is to build reliable digital systems that improve efficiency, increase sales, and help businesses grow faster. We provide practical implementation, stable development, and flexible technical support for agencies and business owners.',
       },
     ],
   },

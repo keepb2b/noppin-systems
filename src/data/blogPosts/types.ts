@@ -1,9 +1,14 @@
-export type BlogCategoryKey = 'technical' | 'ec' | 'cms' | 'animation' | 'operations'
+export type BlogCategoryKey = 'ai' | 'ec' | 'cms' | 'devops' | 'mobile' | 'animation'
 
 export type BlogPostMeta = {
   date: string
   categoryKey: BlogCategoryKey
   excerpt: string
+  description: {
+    title: string
+    overview: string
+    points: string[]
+  }
 }
 
 export type BlogPost = {
@@ -15,22 +20,29 @@ export type BlogPost = {
   categoryKey: BlogCategoryKey
   excerpt: string
   image: string
+  description: {
+    title: string
+    overview: string
+    points: string[]
+  }
 }
 
-export const blogCategoryKeys: BlogCategoryKey[] = ['technical', 'ec', 'cms', 'animation', 'operations']
+export const blogCategoryKeys: BlogCategoryKey[] = ['ai', 'ec', 'cms', 'devops', 'mobile', 'animation']
 
 export const blogCategoryLabelsJa: Record<BlogCategoryKey, string> = {
-  technical: '技術',
+  ai: 'AI・自動化',
   ec: 'EC',
   cms: 'CMS',
+  devops: 'DevOps・インフラ',
+  mobile: 'モバイル・SaaS',
   animation: 'アニメーション',
-  operations: '運用',
 }
 
 export const blogCategoryLabelsEn: Record<BlogCategoryKey, string> = {
-  technical: 'Technical',
+  ai: 'AI & Automation',
   ec: 'E-Commerce',
   cms: 'CMS',
+  devops: 'DevOps & Infra',
+  mobile: 'Mobile & SaaS',
   animation: 'Animation',
-  operations: 'Operations',
 }

@@ -3,8 +3,10 @@ import { PageHero } from '../components/layout/PageHero'
 import { CTASection } from '../components/layout/CTASection'
 import { ArchiveFilter } from '../components/archive/ArchiveFilter'
 import { BlogCard } from '../components/archive/BlogCard'
+import { BlogCardDialog } from '../components/archive/BlogCardDialog'
 import { ServiceStackSection } from '../components/blog/ServiceStackSection'
 import { filterBlogPosts, getBlogFilters, getBlogPosts } from '../data/blogPosts'
+import type { BlogPost } from '../data/blogPosts'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useI18n } from '../i18n'
 
@@ -14,6 +16,7 @@ export function BlogPage() {
   const { dict, locale } = useI18n()
   const [filterIdx, setFilterIdx] = useState(0)
   const [page, setPage] = useState(1)
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
   const ref = useScrollReveal({ staggerMs: 80 })
 
   const posts = useMemo(() => getBlogPosts(locale), [locale])
@@ -70,9 +73,14 @@ export function BlogPage() {
               if (idx >= 0) setFilterIdx(idx)
             }}
           />
-          <div className="grid gap-6 md:grid-cols-3">
-            {paginated.map((p) => (
-              <BlogCard key={p.id} {...p} />
+          <div className="grid gap-4 md:grid-cols-3">
+            {paginated.map((p, i) => (
+              <div
+                key={p.id}
+                style={{ marginTop: `${(i % 3) * 48}px` }}
+              >
+                <BlogCard {...p} onClick={() => setSelectedPost(p)} />
+              </div>
             ))}
           </div>
           {filtered.length === 0 && (
@@ -99,6 +107,7 @@ export function BlogPage() {
           )}
         </div>
       </section>
+      <BlogCardDialog post={selectedPost} onClose={() => setSelectedPost(null)} />
       <CTASection />
     </>
   )
