@@ -136,16 +136,24 @@ export function HomePage() {
                 <Link
                   key={s.number}
                   to="/services"
-                  className="scroll-reveal service-card-mobile absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group rounded-2xl border border-sand-200 bg-white p-8 shadow-sm transition-all duration-1000 ease-in-out"
+                  className="scroll-reveal service-card-mobile absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group rounded-2xl bg-white p-6 shadow-sm transition-all duration-1000 ease-in-out"
                   style={{
                     transform: `translate(-50%, -50%) rotate(${rotation}deg) translateX(${(positionIndex - 2.5) * 80}px) translateY(${(positionIndex - 2.5) * 30}px) scale(var(--card-scale, 1.5))`,
                     zIndex: positionIndex,
+                    border: '2px solid transparent',
+                    background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #10b981 0%, #34d399 50%, #10b981 100%) border-box',
                   }}
                   data-cursor-hover
                 >
-                  <p className="font-display text-sm text-coral-500">{s.number}</p>
-                  <h3 className="mt-2 text-xl font-bold text-navy-900">{s.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-navy-700/75">{s.description}</p>
+                  <div className="relative h-32 w-full overflow-hidden rounded-md bg-gradient-to-br from-navy-100 to-sand-100">
+                    <div className="flex h-full items-center justify-center">
+                      <div className="text-4xl">🖥️</div>
+                    </div>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <h3 className="font-display text-xl font-bold text-navy-900">{s.title}</h3>
+                    <p className="mt-1 text-sm text-coral-500">〈 {s.number} 〉</p>
+                  </div>
                 </Link>
               )
             })}
