@@ -46,6 +46,7 @@ export type Dictionary = {
     relatedWorks: string
     noResults: string
     category: string
+    chatwork: string
   }
   cta: {
     labelEn: string
@@ -124,7 +125,7 @@ export type Dictionary = {
   }
   staff: {
     page: { en: string; ja: string }
-    items: { id: string; name: string; role: string; specialty: string }[]
+    items: { id: string; name: string; role: string; specialty: string; image?: string }[]
   }
   company: {
     page: { en: string; ja: string }
@@ -149,6 +150,24 @@ export type Dictionary = {
   testimonials: {
     section: { en: string; ja: string }
     items: { id: string; quote: string; author: string; role: string; initials: string; avatarFrom: string; avatarTo: string }[]
+  }
+  chatwork: {
+    title: string
+    subtitle: string
+    signup: string
+    alreadySignedUp: string
+    login: string
+    publicProfile: string
+    name: string
+    id: string
+    basicInfo: string
+    organization: string
+    orgName: string
+    urlLabel: string
+    addressLabel: string
+    address: string
+    bio: string
+    bioText: string
   }
   heroTags: string[]
 }

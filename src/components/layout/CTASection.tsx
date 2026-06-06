@@ -23,7 +23,7 @@ export function CTASection() {
           <Button to="/contact" variant="primary">
             {dict.common.freeConsult}
           </Button>
-          <Button href="https://www.chatwork.com" variant="secondary" className="!border-white/30 !text-white hover:!bg-white hover:!text-navy-900">
+          <Button to="/chatwork" variant="secondary" className="!border-white/30 !text-white hover:!bg-white hover:!text-navy-900">
             {dict.cta.chatwork}
           </Button>
         </div>

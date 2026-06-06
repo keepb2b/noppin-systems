@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { footerRoutes } from '../../data/navigation'
 import { useI18n } from '../../i18n'
-import { Button } from '../ui/Button'
 
 export function GlobalFooter() {
   const { dict } = useI18n()
@@ -18,21 +17,7 @@ export function GlobalFooter() {
       </button>
 
       <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <p className="font-display text-xs uppercase tracking-widest text-coral-400">{dict.cta.labelEn}</p>
-            <p className="mt-2 font-serif text-2xl font-bold text-white">{dict.cta.title}</p>
-            <p className="mt-4 text-xl font-semibold text-white">
-              <a href="tel:03-1234-5678" className="hover:text-coral-400">03-1234-5678</a>
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button to="/contact" variant="primary">{dict.common.freeConsultShort}</Button>
-              <Button href="https://www.chatwork.com" variant="secondary" className="!border-white/30 !text-white hover:!bg-white hover:!text-navy-900">
-                ChatWork
-              </Button>
-            </div>
-          </div>
-
+        <div className="grid gap-10 md:grid-cols-2">
           <div>
             <p className="font-semibold text-white">{dict.common.office}</p>
             <address className="mt-3 not-italic text-sm leading-relaxed">
@@ -41,9 +26,12 @@ export function GlobalFooter() {
               <p className="mt-3">{dict.common.osakaOffice}</p>
               <p>大阪府大阪市北区〇〇 4-5-6</p>
             </address>
-            <a href="https://nippon-systems.example" className="mt-4 inline-block text-sm text-coral-400 hover:underline">
-              {dict.common.officialSite}
-            </a>
+            <Link
+              to="/chatwork"
+              className="group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 ease-out border-2 border-white/30 text-white hover:bg-white hover:text-navy-900 hover:-translate-y-0.5"
+            >
+              <span className="whitespace-nowrap">{dict.cta.chatwork}</span>
+            </Link>
           </div>
 
           <div>

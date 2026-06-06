@@ -121,8 +121,13 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section-band-washi section-band-py">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <section className="section-band-washi section-band-py relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-br from-aizome-400/10 via-transparent to-coral-500/5" />
+          <div className="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-aizome-300/20 blur-3xl" />
+          <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-coral-500/10 blur-3xl" />
+        </div>
+        <div className="mx-auto max-w-6xl px-4 md:px-6 relative">
           <SectionTitle en={dict.home.price.en} ja={dict.home.price.ja} />
           <PricingBlock compact />
           <div className="mt-8 text-center">
@@ -179,9 +184,16 @@ export function HomePage() {
       <section ref={blogRef} className="section-band-washi section-band-py">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.blog.en} ja={dict.home.blog.ja} />
-          <div className="grid gap-6 md:grid-cols-3">
-            {getBlogPosts(locale).slice(0, 3).map((p) => (
-              <BlogCard key={p.id} {...p} />
+          <div className="grid gap-4 md:grid-cols-3">
+            {getBlogPosts(locale).slice(0, 3).map((p, i) => (
+              <div
+                key={p.id}
+                style={{ marginTop: `${(i % 3) * 72}px` }}
+                className="group relative"
+              >
+                <div className="absolute -left-3 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-coral-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <BlogCard {...p} />
+              </div>
             ))}
           </div>
           <div className="mt-10 text-center">

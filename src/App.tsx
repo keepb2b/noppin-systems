@@ -15,6 +15,7 @@ const BlogPage = lazy(() => import('./pages/BlogPage').then((m) => ({ default: m
 const StaffPage = lazy(() => import('./pages/StaffPage').then((m) => ({ default: m.StaffPage })))
 const CompanyPage = lazy(() => import('./pages/CompanyPage').then((m) => ({ default: m.CompanyPage })))
 const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })))
+const ChatworkPage = lazy(() => import('./pages/ChatworkPage').then((m) => ({ default: m.ChatworkPage })))
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
                 <Route path="staff" element={<StaffPage />} />
                 <Route path="company" element={<CompanyPage />} />
                 <Route path="contact" element={<ContactPage />} />
+                <Route path="chatwork" element={<ChatworkPage />} />
               </Route>
             </Routes>
           </Suspense>

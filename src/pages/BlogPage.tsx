@@ -77,8 +77,10 @@ export function BlogPage() {
             {paginated.map((p, i) => (
               <div
                 key={p.id}
-                style={{ marginTop: `${(i % 3) * 48}px` }}
+                style={{ marginTop: `${(i % 3) * 72}px` }}
+                className="relative"
               >
+                <div className="absolute -left-3 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-coral-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <BlogCard {...p} onClick={() => setSelectedPost(p)} />
               </div>
             ))}
