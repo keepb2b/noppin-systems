@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { achievementValues } from '../data/navigation'
 import { Button } from '../components/ui/Button'
@@ -32,6 +32,21 @@ export function HomePage() {
   const blogRef = useScrollReveal<HTMLElement>({ staggerMs: 80 })
   const companyRef = useScrollReveal<HTMLElement>()
   const numbersRef = useScrollReveal<HTMLElement>({ staggerMs: 100 })
+  
+  const [cardOrder, setCardOrder] = useState([0, 1, 2, 3, 4, 5])
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCardOrder(prev => {
+        const newOrder = [...prev]
+        const lastCard = newOrder.pop()
+        newOrder.unshift(lastCard!)
+        return newOrder
+      })
+    }, 4000)
+    
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <>
@@ -99,21 +114,41 @@ export function HomePage() {
       <ReasonsChosenSection />
 
       <section ref={servicesRef} className="section-band-white section-band-py">
+        <style>{`
+          @media (max-width: 768px) {
+            .service-card-mobile {
+              --card-scale: 0.8;
+            }
+          }
+          @media (min-width: 769px) {
+            .service-card-mobile {
+              --card-scale: 1.5;
+            }
+          }
+        `}</style>
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <SectionTitle en={dict.home.servicesPreview.en} ja={dict.home.servicesPreview.ja} />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {dict.services.items.slice(0, 6).map((s) => (
-              <Link
-                key={s.number}
-                to="/services"
-                className="scroll-reveal group rounded-2xl border border-sand-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-coral-500/30 hover:shadow-lg"
-                data-cursor-hover
-              >
-                <p className="font-display text-sm text-coral-500">{s.number}</p>
-                <h3 className="mt-2 text-lg font-bold text-navy-900 group-hover:text-coral-500">{s.title}</h3>
-                <p className="mt-2 line-clamp-2 text-sm text-navy-700/75">{s.description}</p>
-              </Link>
-            ))}
+          <div className="relative mx-auto h-[600px] w-full max-w-3xl">
+            {dict.services.items.slice(0, 6).map((s, index) => {
+              const positionIndex = cardOrder.indexOf(index)
+              const rotation = positionIndex === 5 ? 0 : (positionIndex - 2.5) * 12
+              return (
+                <Link
+                  key={s.number}
+                  to="/services"
+                  className="scroll-reveal service-card-mobile absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group rounded-2xl border border-sand-200 bg-white p-8 shadow-sm transition-all duration-1000 ease-in-out"
+                  style={{
+                    transform: `translate(-50%, -50%) rotate(${rotation}deg) translateX(${(positionIndex - 2.5) * 80}px) translateY(${(positionIndex - 2.5) * 30}px) scale(var(--card-scale, 1.5))`,
+                    zIndex: positionIndex,
+                  }}
+                  data-cursor-hover
+                >
+                  <p className="font-display text-sm text-coral-500">{s.number}</p>
+                  <h3 className="mt-2 text-xl font-bold text-navy-900">{s.title}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm text-navy-700/75">{s.description}</p>
+                </Link>
+              )
+            })}
           </div>
           <div className="mt-10 text-center">
             <Button to="/services" variant="primary">{dict.home.servicesPreview.viewAll}</Button>
